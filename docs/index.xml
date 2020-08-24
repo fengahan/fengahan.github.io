@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>走狗</title>
+    <link>https://fengahan.github.io/</link>
+    <description>Recent content on 走狗</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Copyright notice</copyright>
+    <lastBuildDate>Mon, 24 Aug 2020 21:36:46 +0800</lastBuildDate>
+    
+	<atom:link href="https://fengahan.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>还在手动添加路由进行rabc权限管理,那太out了</title>
+      <link>https://fengahan.github.io/technology/php-auto-generate-route/</link>
+      <pubDate>Mon, 24 Aug 2020 21:36:46 +0800</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/php-auto-generate-route/</guid>
+      <description>后台rabc权限是很普遍的一个应该应用了,目前后台基础框架,一大堆也很少有人去从头开始实现后台基础项目的部署.
+但是如果你找到到基础后台项目还没有实现 通过reflect实现路由到自动到添加和整合,就真的是太out了。。。
+老规矩 闲话少叙,言归正传。比如我现在写了一个member Controller 内容如下
+&amp;lt;?php Class Member{ public function __construct(){} /** * @return false|string */ public function index(){ return $this-&amp;gt;out([&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;,&amp;#39;D&amp;#39;]); } /** * @return false|string */ public function create(){ return $this-&amp;gt;out([&amp;#39;success&amp;#39;]); } /** * @return false|string */ public function update(){ return $this-&amp;gt;out([&amp;#39;success&amp;#39;]); } /** * @return array */ public static function view(){ return []; } /** * @return array */ protected function findModel(){ return []; } /** * @return false|string */ private function out(array $data){ return json_encode($data); } public function __destruct() { return; } }  十年前的方式:</description>
+    </item>
+    
+    <item>
+      <title>PHP利用stack(栈)写了个简单都计算器</title>
+      <link>https://fengahan.github.io/technology/php-todo-simplae-opernumber/</link>
+      <pubDate>Fri, 14 Aug 2020 20:11:19 +0659</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/php-todo-simplae-opernumber/</guid>
+      <description>废话少说先上代码才是好汉,其核心部分为将人们平常用的中缀表达式(运算符在中间)转换为后缀表达式。计算的时候只需先
+依次读出符号再读出该符号前两个数字即可,以下一个简单的示列:代码写的很丑 请务嘲笑😊
+&amp;lt;?php /** * * php 实现基本的计算器 支持+ - * / 以及优先运算符() * 仅支持(个位数)不支持小数点和多位数 * 仅需要简单修改即可支持小数点和多位数(思路:scan中缀表达式的时候进行正则匹配数字)。 */ const OADD = 1; const OSUB = 1; const OMUL = 2; const ODIV = 2; $oper_stack = array(); $number_stack = array(); /** 转逆波兰表达式 */ $sym = &amp;#34;1+(2+3)*4-8/4+3*(2+1)&amp;#34;; $sym_len = mb_strlen($sym); for ($i = 0; $i &amp;lt; $sym_len; $i++) { $char = $sym[$i]; if (ctype_digit($char)) {//数字  array_push($number_stack, $char); } else {//操作符号  if ((empty($oper_stack) || $char == &amp;#34;(&amp;#34;) &amp;amp;&amp;amp; $char !</description>
+    </item>
+    
+    <item>
+      <title>简单的讲讲Redis分布式hash到底是啥情况</title>
+      <link>https://fengahan.github.io/technology/what-redis-distributed-hash/</link>
+      <pubDate>Mon, 25 Nov 2019 13:45:07 +0710</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/what-redis-distributed-hash/</guid>
+      <description>话说分布式一致性Hash可以理解为 放在什么圆环上。长篇大论的讲的我没兴趣看下去，其实最简单的一句话就是普通hash 是按照key值找server 而分布式hash 是按照key值所在的server(hash值)的范围找server。</description>
+    </item>
+    
+    <item>
+      <title>Twitter的分布式自增ID算法snowflake (PHP版)</title>
+      <link>https://fengahan.github.io/technology/php-to-do-snowflow-autoid/</link>
+      <pubDate>Sat, 26 Oct 2019 11:05:58 +0530</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/php-to-do-snowflow-autoid/</guid>
+      <description>！！！注意 ！注意！注意 重要的事情说三遍 在Php-fpm 的运行方式下并不安全 可以用在workman 和swoole 等常驻内存的应用程序上 &amp;lt;?php /** * Created by PhpStorm. * User: hanfeng * Date: 2018/8/24 * Time: 11:38 */ class Snow{ /** 开始时间截 (2015-01-01) */ private $twepoch = 1420041600000; private $workerIdBits = 5; private $dataCenterIdBits=5; private $maxWorkerId; private $maxDataCenterId ; private $sequenceBits =12; private $workerIdShift; private $dataCenterIdShift; private $timestampLeftShift; private $sequenceMask; private $workerId; private $dataCenterId; private $sequence=0; private $lastTimestamp = -1; public function __construct($workerId,$dataCenterId) { if ($workerId&amp;gt;$this-&amp;gt;maxWorkerId ||$workerId&amp;lt;0){ throw new \Exception(&amp;#34;workerId 有误&amp;#34;); } if ($dataCenterId&amp;gt;$this-&amp;gt;maxDataCenterId || $dataCenterId&amp;lt;0){ throw new \Exception(&amp;#34;dataCenterId 有误&amp;#34;); } $this-&amp;gt;workerId=$workerId; $this-&amp;gt;dataCenterId=$dataCenterId; $this-&amp;gt;maxWorkerId=-1 ^ (-1 &amp;lt;&amp;lt; $this-&amp;gt;workerIdBits); $this-&amp;gt;workerIdShift=$this-&amp;gt;sequenceBits; $this-&amp;gt;dataCenterIdShift=$this-&amp;gt;sequenceBits + $this-&amp;gt;workerIdBits; $this-&amp;gt;timestampLeftShift=$this-&amp;gt;dataCenterIdShift+$this-&amp;gt;dataCenterIdBits; $this-&amp;gt;sequenceMask=-1 ^ (-1 &amp;lt;&amp;lt; $this-&amp;gt;sequenceBits); } public function nextId() { $timestamp=$this-&amp;gt;getTimeMicro(); //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常  if ($timestamp &amp;lt; $this-&amp;gt;lastTimestamp){ throw new \Exception(&amp;#34;时间有误。请重新调整系统时间&amp;#34;); } if ($this-&amp;gt;lastTimestamp == $timestamp) { $this-&amp;gt;sequence = ($this-&amp;gt;sequence + 1) &amp;amp; $this-&amp;gt;sequenceMask; //毫秒内序列溢出  if ($this-&amp;gt;sequence == 0) { //阻塞到下一个毫秒,获得新的时间戳  $timestamp= $this-&amp;gt;tilNextMillis($this-&amp;gt;lastTimestamp); } } //时间戳改变，毫秒内序列重置  else { $this-&amp;gt;sequence = 0; } //上次生成ID的时间截  $this-&amp;gt;lastTimestamp = $timestamp; //移位并通过或运算拼到一起组成64位的ID  return (($timestamp - $this-&amp;gt;twepoch) &amp;lt;&amp;lt; $this-&amp;gt;timestampLeftShift) //  | ($this-&amp;gt;dataCenterId &amp;lt;&amp;lt; $this-&amp;gt;dataCenterIdShift) //  | ($this-&amp;gt;workerId &amp;lt;&amp;lt; $this-&amp;gt;workerIdShift) //  | $this-&amp;gt;sequence; } public function tilNextMillis($stamp){ $timestamp = $this-&amp;gt;getTimeMicro(); while ($timestamp &amp;lt;= $stamp) { $timestamp = $this-&amp;gt;getTimeMicro(); } return $timestamp; } /** * 获取毫秒 */ public function getTimeMicro() { list($mic,$at)=explode(&amp;#34; &amp;#34;,microtime());//  return (float)sprintf(&amp;#39;%.</description>
+    </item>
+    
+    <item>
+      <title>写了一个基于Yii2&#43;Layui的后台管理系统Yat，目的是打造最好用的Yii2的后台管理</title>
+      <link>https://fengahan.github.io/technology/opensourec-yat-project/</link>
+      <pubDate>Sat, 14 Sep 2019 16:33:57 +0930</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/opensourec-yat-project/</guid>
+      <description>下面开启预览图 顺便附上git地址 本人不是star控 如果阁下觉得很丑很不实用 请勿点star(废话)Git仓库在这里 为什么要写 之前一直用adminLite 但是界面好丑，虽然后台界面无所谓，但是对于一个追求完美的我无法忍受，网上找了一波，也没自己满意的，索性自己利用空闲时间写了一个</description>
+    </item>
+    
+    <item>
+      <title>关于php中自定义错误处理函数遇到的问题</title>
+      <link>https://fengahan.github.io/technology/php-custom-throws-exptiopn/</link>
+      <pubDate>Sun, 01 Sep 2019 20:44:58 +0648</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/php-custom-throws-exptiopn/</guid>
+      <description>其实遇到问题的原因，是因为打算要用walker 提供的针对mysql 8小时因无数据传输而断开链接进行优化的mysql类，实现思路是在进行sql执行的时候 进行try catch ，然而在第一次执行的 时候 加入已经断开链接，就输出一条Warning 异常 就是 mysql gone away的错误，因为 文章是隔天写的，所以这里不再展示具体的错误信息,因为我之前自定义了错误处理方式,所以 这条 warning 就会阻止程序运行而直接给客户端返回500，这样就无法进入catch 于是我想用&amp;rdquo;@&amp;rdquo; 符号去 屏蔽该错误但是还是会输出，下面是之前的错误处理代码
+&amp;lt;?php class testError{ public function handleError($errno, $errstr, $errfile, $errline) { $this-&amp;gt;context-&amp;gt;sendCode(500); $this-&amp;gt;context-&amp;gt;send(&amp;#34;Internals Server Error&amp;#34;); $errName=$this-&amp;gt;getErrorName($errno); $message= &amp;#34;$errName$errstron line $errlinein file $errfile&amp;#34;.PHP_EOL; $err= &amp;#34;\033[0;33m {$message}\e \033[0m&amp;#34;.PHP_EOL; $this-&amp;gt;renderError($err); return true; } } 下面是改进后的代码
+&amp;lt;?php class testError{ public function handleError($errno, $errstr, $errfile, $errline) { if (error_reporting() == 0) {//如果不加这个将会怎么呢怎么呢 @符号将无法抑制错误输出  return true; } $this-&amp;gt;context-&amp;gt;sendCode(500); $this-&amp;gt;context-&amp;gt;send(&amp;#34;Internals Server Error&amp;#34;); $errName=$this-&amp;gt;getErrorName($errno); $message= &amp;#34;$errName$errstron line $errlinein file $errfile&amp;#34;; $err= &amp;#34;\033[0;33m {$message}\e \033[0m&amp;#34;.</description>
+    </item>
+    
+    <item>
+      <title>Golang之Websocket（发送消息)</title>
+      <link>https://fengahan.github.io/technology/golang-websockt-todo3/</link>
+      <pubDate>Sat, 24 Aug 2019 17:23:11 +0946</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/golang-websockt-todo3/</guid>
+      <description>到这里websocket 就算实现完毕了, 这里仅仅针对127 个字节以下的数据进行发送 剩下的请根据websocket 协议自行补充.
+/** 装包 **/ func sendhMessgeData(conn net.Conn) { msgStr:=&amp;#34;hello word&amp;#34; content:=[]byte(msgStr) msg:= &amp;#34;\x81&amp;#34;+string(rune(len(content)))+msgStr//string(rune(len(content))取单字符的assic码 	conn.Write([]byte(msg)) } 下面献上完整的代码
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;strings&amp;#34; &amp;#34;crypto/sha1&amp;#34; &amp;#34;encoding/base64&amp;#34; ) const SRCKEY =&amp;#34;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&amp;#34; var Client =make(map[string]string) func main() { n,err:=net.Listen(&amp;#34;tcp&amp;#34;,&amp;#34;:8080&amp;#34;) if err !=nil { panic(err) } for { conn,err:=n.Accept() if err!=nil { fmt.Println(err) continue }else { go handler(conn) } } } func handler(conn net.Conn) { defer conn.Close() for { //判断是否已经握手 	rmtAddr:=conn.</description>
+    </item>
+    
+    <item>
+      <title>Golang之Websocket（接收消息)</title>
+      <link>https://fengahan.github.io/technology/golang-websockt-todo2/</link>
+      <pubDate>Thu, 22 Aug 2019 21:42:18 +0333</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/golang-websockt-todo2/</guid>
+      <description>具体大家看下代码实现，这里不做过多的赘述,改方式仅仅实现简单的解析 ，然而实际使用中要复杂的多, 下面的代码只是为了熟悉流程，以及锻炼下从文档到代码的能力
+/** 解包 */ func getMessageData(conn net.Conn) (error,string) { var m =make([]byte,256) _,er:=conn.Read(m) if er!=nil { delete(Client,conn.RemoteAddr().String()) return er,&amp;#34;&amp;#34; } var playDataLen byte var realLen byte //真实的数据长度  var recData []byte //经过运算的recData 原数据 就是客户端发来是什么样就是什么样 	var mask []byte //mask 与recData 按位异或运算可得rec 	var rec []byte //得到的真是数据 	fin:=m[0]&amp;gt;&amp;gt;7 if fin==0 {//fin 为0 代表有后续消息 fin为1 代表已经是最后一条消息这里不关心 	playDataLen=m[1] &amp;amp; 127 }else{ //数据消息长度 	playDataLen=m[1] &amp;amp; 127 } if playDataLen&amp;lt;126 { realLen=playDataLen mask=m[2:6] recData=m[6:] }else if playDataLen==126 { mask=m[3:7] realLen=m[2] +m[3] recData=m[7:] }else{ // 这里默认当做127个字节处理 为什么i&amp;lt;11 呢 有效负载长度：7位，7 + 16位或7 + 64位 	//当为127是就是64位8个字节前两个字节是fin+op+resv等等所以第三个字节到第11个字节是真实际长度 	for i:=3;i&amp;lt;11;i++ { realLen+=realLen } mask=m[11:15] recData=m[15:] } for i:=0;i&amp;lt;int(realLen);i++ { r:= recData[i] ^ mask[i%4]//这里是百度的没找到出处 	rec=append(rec,r) } return nil,string(rec) } </description>
+    </item>
+    
+    <item>
+      <title>Golang之Websocket（握手)</title>
+      <link>https://fengahan.github.io/technology/golang-websockt-todo1/</link>
+      <pubDate>Wed, 21 Aug 2019 17:22:48 +0633</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/golang-websockt-todo1/</guid>
+      <description>空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手 2.发送Frames, 3.接收Frames 关于websocket 的握手大家可以wiki上面看一下,下面是我的golang 实现捂手部分 参考文献RFC6455 和 webcoket分析
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;strings&amp;#34; &amp;#34;crypto/sha1&amp;#34; &amp;#34;encoding/base64&amp;#34; ) const SRCKEY =&amp;#34;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&amp;#34; var Client =make(map[string]string) func main() { n,err:=net.Listen(&amp;#34;tcp&amp;#34;,&amp;#34;:8080&amp;#34;) if err !=nil { panic(err) } for { conn,err:=n.Accept() if err!=nil { fmt.Println(err) } go handler(conn) } } func handler(conn net.Conn) { defer conn.Close() for { //判断是否已经握手 	rmtAddr:=conn.RemoteAddr().String()//获取客户端的地址。 	if _,ok:=Client[rmtAddr];!ok { fmt.Println(&amp;#34;start Hand&amp;#34;) hr:=doHand(conn) if hr==nil { fmt.Println(&amp;#34;hand Success&amp;#34;) Client[rmtAddr]=&amp;#34;Y&amp;#34; }else { fmt.</description>
+    </item>
+    
+    <item>
+      <title>今天有大佬在群里问go的[]uint8怎么转string</title>
+      <link>https://fengahan.github.io/technology/golang-convert-uint8byte-tostring/</link>
+      <pubDate>Wed, 14 Aug 2019 16:05:58 +0530</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/golang-convert-uint8byte-tostring/</guid>
+      <description>var user_nickname []uint8 b := make([]byte, len(user_nickname)) for i, v := range user_nickname { b[i] = byte(v) } fmt.Println(string(b)) </description>
+    </item>
+    
+    <item>
+      <title>我来在Linux上装个Mysql</title>
+      <link>https://fengahan.github.io/technology/install-mysql-on-linux/</link>
+      <pubDate>Sun, 21 Jul 2019 17:09:42 +0915</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/install-mysql-on-linux/</guid>
+      <description>废话不多说，说了没用，我这里是新的虚拟机centos 操作系统版本6.8 资源地址 https://cdn.mysql.com//Downloads/MySQL-5.6/mysql-5.6.41.tar.gz
+1.通过yum 安装cmake 和gcc 以及其他工具（如果之前编译过其他程序 就不需要了) $ yum install gcc gcc-c++ $ yum install cmake -y  $ yum -y install perl perl-devel $ yum install ncurses-devel -y
+2.创建数据存储路径: mkdir -p /data/mysql 
+3.添加mysql组和用户 $ groupadd mysql $ useradd -M mysql -g mysql -s /sbin/nologin //创建mysql用户并禁止mysql登陆系统 $ chown -R mysql.mysql /data/mysql  $ mkdir /usr/local/mysql //创建mysql目录
+4.下载并编译安装 $ wget https://cdn.mysql.com//Downloads/MySQL-5.6/mysql-5.6.41.tar.gz $ tar -zxvf mysql-5.6.41.tar.gz  cd mysql-5.6.41 /usr/bin/cmake \ -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \ -DMYSQL_DATADIR=/data/mysql \ -DSYSCONFDIR=/etc \ -DWITH_MYISAM_STORAGE_ENGINE=1 \ -DWITH_INNOBASE_STORAGE_ENGINE=1 \ -DWITH_MEMORY_STORAGE_ENGINE=1 \ -DWITH_READLINE=1 \ -DMYSQL_UNIX_ADDR=/tmp/mysql.</description>
+    </item>
+    
+    <item>
+      <title>爬虫京东商品为mysql 生成数据</title>
+      <link>https://fengahan.github.io/technology/crawling-jd-prodect-to-database-via-golang/</link>
+      <pubDate>Thu, 18 Jul 2019 12:31:58 +0530</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/crawling-jd-prodect-to-database-via-golang/</guid>
+      <description>真心不容易啊 下班了自己的时间在本地做测试。 因为服务器要新增3台从数据库 如此大任，舍我其谁 哈哈，所以我 还是先在本地走一遍流程避免出现问题，为了尽量的模仿线上的情况，写了这个东东 一直插入数据
+增加从数据库以及使用xtrabackup备份的文章以后再写吧 只是简单记录了笔记没整理 但是代码是现成的 大家拿去用吧
+&amp;lt;?php $dsn = &amp;#39;mysql:dbname=ff_items;host=192.168.31.123;port=3306&amp;#39;; $username = &amp;#39;root&amp;#39;; $password = &amp;#39;123456&amp;#39;; try { $db = new PDO($dsn, $username, $password); $db-&amp;gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); } catch(PDOException $e) { die(&amp;#34;Could not connect to the database:\n&amp;#34; . $e); } $sql=&amp;#34;INSERT INTO `ff_goods` (`name`, `url`, `price`, `img`, `created_at`) VALUES (?,?,?,?,?)&amp;#34;; $stm=$db-&amp;gt;prepare($sql); // $sub=[12098,12097,12095,12472,12473,12111]; $url_preg=&amp;#34;https://coll.jd.com/list.html?sub={{sub}}&amp;amp;page={{page}}&amp;amp;JL=6_0_0&amp;#34;; $c=count($sub); for ($i=0;$i&amp;lt;$c;$i++){ $subUrl=str_replace(&amp;#34;{{sub}}&amp;#34;,$sub[$i],$url_preg); for ($j=1;$j&amp;lt;100;$j++){ $contentUrl=str_replace(&amp;#34;{{page}}&amp;#34;,$j,$subUrl); $content=get_content_by_curl($contentUrl); $arr=getContentVale($content); echo &amp;#34;insert：$contentUrl\n&amp;#34;; for($k=0;$k&amp;lt;count($arr);$k++){ $stm-&amp;gt;bindParam(1,mb_substr($arr[$k][&amp;#39;name&amp;#39;],2)); $stm-&amp;gt;bindParam(2,$arr[$k][&amp;#39;url&amp;#39;]); $stm-&amp;gt;bindParam(3,$arr[$k][&amp;#39;price&amp;#39;],PDO::PARAM_INT); $stm-&amp;gt;bindParam(4,$arr[$k][&amp;#39;img&amp;#39;]); $stm-&amp;gt;bindParam(5,time(),PDO::PARAM_INT); $stm-&amp;gt;execute(); $t=rand(0,2);//此处sleep 可调整  sleep($t); } } } /** *获取指定url的数据 * @param string $url 地址 * @return string */ function get_content_by_curl($url){ $curl = curl_init(); curl_setopt($curl, CURLOPT_URL, $url); curl_setopt($curl, CURLOPT_HEADER, 1); curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); $data = curl_exec($curl); curl_close($curl); return $data; } /** * @param string $content 爬到的内容 * @return array */ function getContentVale($content){ $goods_list=[]; $rue=&amp;#34;/&amp;lt;div\sclass=\&amp;#34;g\w+(.</description>
+    </item>
+    
+    <item>
+      <title>Redis2.8 在PHP7.2 下的一个Bug</title>
+      <link>https://fengahan.github.io/technology/find-a-bug-of-redis1-on-php7/</link>
+      <pubDate>Fri, 12 Jul 2019 19:22:52 +0730</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/find-a-bug-of-redis1-on-php7/</guid>
+      <description>众所周知，当redis中key数量越大，keys 命令执行越慢，而且最重要的会阻塞服务器，对单线程的redis来说，简直是灾难，终于找到了替代命令scan。 而bug 就出现在这里 问题有一两个月了吧，但是当时没写博客记录,现在想想 还是记下吧，避免大佬们采坑,php的具体版本记不清了，就记得是PHP7.2 .X
+在PHP5.6 的版本号是可以的。第一次执行是PHP5.6 正常，第二次是PHP7.2.X 报错误段错误。大家注意下哦 ，可以现在测试服搭建下 如果能用 再 去正式服吧
+因为我不太清楚 7的 哪个版本能用，不过建议用最新版本(由于博客迁移造成原图丢失-抱歉)</description>
+    </item>
+    
+    <item>
+      <title>如何在控制台 输出带有颜色 的字体（转载）</title>
+      <link>https://fengahan.github.io/technology/stdout-console-color/</link>
+      <pubDate>Tue, 18 Jun 2019 12:51:18 +0211</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/stdout-console-color/</guid>
+      <description>先在终端运行下看下效果
+echo -e &amp;#34;\033[1;31mI ♡ You \e[0m&amp;#34; 请注意，引号内的\e等同于\033；\033、\x1b和\e效果是一样，对应键盘左上角Esc键对应的ASCII码（8进制）； 通用的控制文本颜色的转义序列格式如下：
+CSI n1 [;n2 [;…]] m 其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&amp;rdquo;\033[&amp;quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；
+n1、n2等表示SGR参数（下面会列出一些常用的SGR参数），用于控制颜色、粗体、斜体、闪烁等文本输出格式；m表示转义序列结束。
+颜色参数 常用颜色 格式：\033[显示方式;前景色;背景色m
+说明： 前景色 背景色 颜色
+   前景色 背景色 颜色     30 40 黑色   31 41 红色   32 42 绿色   33 43 黃色   34 44 蓝色   35 45 紫红色   36 46 青蓝色   37 47 白色       序号 释义     0 终端默认设置   1 高亮显示   4 使用下划线   5 闪烁   7 反白显示   8 不可见    例子： \033[1;31;40m \033[0m 输入图片说明</description>
+    </item>
+    
+    <item>
+      <title>关于我</title>
+      <link>https://fengahan.github.io/about/</link>
+      <pubDate>Fri, 19 Apr 2019 21:37:58 +0530</pubDate>
+      
+      <guid>https://fengahan.github.io/about/</guid>
+      <description>从这里了解我</description>
+    </item>
+    
+    <item>
+      <title>这里还什么都没有</title>
+      <link>https://fengahan.github.io/life/post-1/</link>
+      <pubDate>Sun, 18 Mar 2018 02:01:58 +0530</pubDate>
+      
+      <guid>https://fengahan.github.io/life/post-1/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
