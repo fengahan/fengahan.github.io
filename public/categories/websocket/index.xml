@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>websocket on 走狗</title>
+    <link>https://fengahan.github.io/categories/websocket/</link>
+    <description>Recent content in websocket on 走狗</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Copyright notice</copyright>
+    <lastBuildDate>Sat, 24 Aug 2019 17:23:11 +0946</lastBuildDate>
+    
+	<atom:link href="https://fengahan.github.io/categories/websocket/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang之Websocket（发送消息)</title>
+      <link>https://fengahan.github.io/technology/golang-websockt-todo3/</link>
+      <pubDate>Sat, 24 Aug 2019 17:23:11 +0946</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/golang-websockt-todo3/</guid>
+      <description>到这里websocket 就算实现完毕了, 这里仅仅针对127 个字节以下的数据进行发送 剩下的请根据websocket 协议自行补充.
+/** 装包 **/ func sendhMessgeData(conn net.Conn) { msgStr:=&amp;#34;hello word&amp;#34; content:=[]byte(msgStr) msg:= &amp;#34;\x81&amp;#34;+string(rune(len(content)))+msgStr//string(rune(len(content))取单字符的assic码 	conn.Write([]byte(msg)) } 下面献上完整的代码
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;strings&amp;#34; &amp;#34;crypto/sha1&amp;#34; &amp;#34;encoding/base64&amp;#34; ) const SRCKEY =&amp;#34;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&amp;#34; var Client =make(map[string]string) func main() { n,err:=net.Listen(&amp;#34;tcp&amp;#34;,&amp;#34;:8080&amp;#34;) if err !=nil { panic(err) } for { conn,err:=n.Accept() if err!=nil { fmt.Println(err) continue }else { go handler(conn) } } } func handler(conn net.Conn) { defer conn.Close() for { //判断是否已经握手 	rmtAddr:=conn.</description>
+    </item>
+    
+    <item>
+      <title>Golang之Websocket（接收消息)</title>
+      <link>https://fengahan.github.io/technology/golang-websockt-todo2/</link>
+      <pubDate>Thu, 22 Aug 2019 21:42:18 +0333</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/golang-websockt-todo2/</guid>
+      <description>具体大家看下代码实现，这里不做过多的赘述,改方式仅仅实现简单的解析 ，然而实际使用中要复杂的多, 下面的代码只是为了熟悉流程，以及锻炼下从文档到代码的能力
+/** 解包 */ func getMessageData(conn net.Conn) (error,string) { var m =make([]byte,256) _,er:=conn.Read(m) if er!=nil { delete(Client,conn.RemoteAddr().String()) return er,&amp;#34;&amp;#34; } var playDataLen byte var realLen byte //真实的数据长度  var recData []byte //经过运算的recData 原数据 就是客户端发来是什么样就是什么样 	var mask []byte //mask 与recData 按位异或运算可得rec 	var rec []byte //得到的真是数据 	fin:=m[0]&amp;gt;&amp;gt;7 if fin==0 {//fin 为0 代表有后续消息 fin为1 代表已经是最后一条消息这里不关心 	playDataLen=m[1] &amp;amp; 127 }else{ //数据消息长度 	playDataLen=m[1] &amp;amp; 127 } if playDataLen&amp;lt;126 { realLen=playDataLen mask=m[2:6] recData=m[6:] }else if playDataLen==126 { mask=m[3:7] realLen=m[2] +m[3] recData=m[7:] }else{ // 这里默认当做127个字节处理 为什么i&amp;lt;11 呢 有效负载长度：7位，7 + 16位或7 + 64位 	//当为127是就是64位8个字节前两个字节是fin+op+resv等等所以第三个字节到第11个字节是真实际长度 	for i:=3;i&amp;lt;11;i++ { realLen+=realLen } mask=m[11:15] recData=m[15:] } for i:=0;i&amp;lt;int(realLen);i++ { r:= recData[i] ^ mask[i%4]//这里是百度的没找到出处 	rec=append(rec,r) } return nil,string(rec) } </description>
+    </item>
+    
+    <item>
+      <title>Golang之Websocket（握手)</title>
+      <link>https://fengahan.github.io/technology/golang-websockt-todo1/</link>
+      <pubDate>Wed, 21 Aug 2019 17:22:48 +0633</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/golang-websockt-todo1/</guid>
+      <description>空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手 2.发送Frames, 3.接收Frames 关于websocket 的握手大家可以wiki上面看一下,下面是我的golang 实现捂手部分 参考文献RFC6455 和 webcoket分析
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;strings&amp;#34; &amp;#34;crypto/sha1&amp;#34; &amp;#34;encoding/base64&amp;#34; ) const SRCKEY =&amp;#34;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&amp;#34; var Client =make(map[string]string) func main() { n,err:=net.Listen(&amp;#34;tcp&amp;#34;,&amp;#34;:8080&amp;#34;) if err !=nil { panic(err) } for { conn,err:=n.Accept() if err!=nil { fmt.Println(err) } go handler(conn) } } func handler(conn net.Conn) { defer conn.Close() for { //判断是否已经握手 	rmtAddr:=conn.RemoteAddr().String()//获取客户端的地址。 	if _,ok:=Client[rmtAddr];!ok { fmt.Println(&amp;#34;start Hand&amp;#34;) hr:=doHand(conn) if hr==nil { fmt.Println(&amp;#34;hand Success&amp;#34;) Client[rmtAddr]=&amp;#34;Y&amp;#34; }else { fmt.</description>
+    </item>
+    
+  </channel>
+</rss>

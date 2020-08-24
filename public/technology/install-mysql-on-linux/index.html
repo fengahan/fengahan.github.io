@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>我来在Linux上装个Mysql - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="我来在Linux上装个Mysql">
+<meta itemprop="description" content="想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次">
+<meta itemprop="datePublished" content="2019-07-21T17:09:42+09:15" />
+<meta itemprop="dateModified" content="2019-07-21T17:09:42+09:15" />
+<meta itemprop="wordCount" content="269">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta property="og:title" content="我来在Linux上装个Mysql" />
+<meta property="og:description" content="想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fengahan.github.io/technology/install-mysql-on-linux/" />
+<meta property="article:published_time" content="2019-07-21T17:09:42+09:15" />
+<meta property="article:modified_time" content="2019-07-21T17:09:42+09:15" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="我来在Linux上装个Mysql"/>
+<meta name="twitter:description" content="想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://fengahan.github.io/css/dark.css" />
+
+	<script src="https://fengahan.github.io/js/feather.min.js"></script>
+	
+		<script src="https://fengahan.github.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://fengahan.github.io/">
+				<img src="https://s1.ax1x.com/2020/08/22/dds4bR.png" alt="走狗" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://fengahan.github.io/">走狗</a></h1>
+	<div class="site-description"><p>知识是有限的,想象力是无限的。-Albert Einstein</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/fengahan" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
+		</nav><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">首页</a>
+			</li>
+			
+			<li>
+				<a href="/technology">技术</a>
+			</li>
+			
+			<li>
+				<a href="/life">生活</a>
+			</li>
+			
+			<li>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/about">关于me</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">21</span>
+							<span class="rest">七月 2019</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">我来在Linux上装个Mysql</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>废话不多说，说了没用，我这里是新的虚拟机centos 操作系统版本6.8
+资源地址 <a href="https://cdn.mysql.com//Downloads/MySQL-5.6/mysql-5.6.41.tar.gz">https://cdn.mysql.com//Downloads/MySQL-5.6/mysql-5.6.41.tar.gz</a></p>
+<p>1.通过yum 安装cmake 和gcc 以及其他工具（如果之前编译过其他程序 就不需要了)
+<code>$ yum install gcc gcc-c++</code>
+<code>$ yum install cmake  -y </code>
+<code>$  yum -y install perl perl-devel</code>
+<code>$ yum install ncurses-devel -y</code></p>
+<p>2.创建数据存储路径:
+<code>mkdir  -p  /data/mysql </code></p>
+<p>3.添加mysql组和用户
+<code>$ groupadd mysql</code>
+<code>$ useradd -M mysql -g mysql -s /sbin/nologin  //创建mysql用户并禁止mysql登陆系统</code>
+<code>$ chown  -R  mysql.mysql  /data/mysql </code>
+<code>$ mkdir /usr/local/mysql //创建mysql目录</code></p>
+<p>4.下载并编译安装
+<code>$ wget  https://cdn.mysql.com//Downloads/MySQL-5.6/mysql-5.6.41.tar.gz</code>
+<code>$ tar  -zxvf mysql-5.6.41.tar.gz </code>
+<code>cd  mysql-5.6.41</code>
+<code>/usr/bin/cmake \</code>
+<code>-DCMAKE_INSTALL_PREFIX=/usr/local/mysql   \</code>
+<code>-DMYSQL_DATADIR=/data/mysql   \</code>
+<code>-DSYSCONFDIR=/etc   \</code>
+<code>-DWITH_MYISAM_STORAGE_ENGINE=1 \</code>
+<code>-DWITH_INNOBASE_STORAGE_ENGINE=1 \</code>
+<code>-DWITH_MEMORY_STORAGE_ENGINE=1 \</code>
+<code>-DWITH_READLINE=1 \</code>
+<code>-DMYSQL_UNIX_ADDR=/tmp/mysql.sock \</code>
+<code>-DMYSQL_TCP_PORT=3306 \</code>
+<code>-DENABLED_LOCAL_INFILE=1 \</code>
+<code>-DWITH_PARTITION_STORAGE_ENGINE=1 \</code>
+<code>-DEXTRA_CHARSETS=all \</code>
+<code>-DDEFAULT_CHARSET=utf8 \</code>
+<code>-DDEFAULT_COLLATION=utf8_general_ci</code>
+5.然后执行
+<code>$ make &amp;&amp; make install</code>
+这块执行根据机器配置时间有所不同，请耐心等下，顺便喝杯咖啡，不过你一定会听到风扇的声音
+完成后我们进行初始化数据库以及配置</p>
+<p>6.切换到<code>/usr/local/mysql </code>目录 然后执行</p>
+<p>7.<code>cp support-files/my-default.cnf  /etc/my.cnf  //一般新的服务器在etc 下存在这个配置文件我们需要把之前的改为其他名字如 my_bak.cnf</code></p>
+<p>8.切换到<code>/usr/local/mysql/scripts</code>  并执行从而初始化数据库
+<code>./mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql --defaults-file=/etc/my.cnf //初始化数据库</code></p>
+<p>9.//设置环境变量 方便我们在任何工作目录使用mysql 命令
+<code>PATH=$PATH:/usr/local/mysql/bin;export PATH</code></p>
+<p>10.我们编辑<code>/etc/my.cnf</code> 为下，
+#Remove leading # to turn on a very important data integrity option: logging
+#changes to the binary log between backups.
+#log_bin
+#These are commonly set, remove the # and set as required.
+<code>basedir =/usr/local/mysql</code>//新增加部分
+<code>datadir =/data/mysql</code>//新增加部分
+<code>port = 3306</code>//新增加部分
+#server_id = &hellip;..
+#socket =/tmp/mysql.sock
+<code>[mysqld_safe]</code>//新增加部分
+<code>user=mysql</code>//新增加部分
+<code>tmdir=/tmp</code>//新增加部分
+#Remove leading # to set options mainly useful for reporting servers.
+#The server defaults are faster for transactions and fast SELECTs.
+#Adjust sizes as needed, experiment to find the optimal values.
+#join_buffer_size = 128M
+#sort_buffer_size = 2M
+#read_rnd_buffer_size = 2M
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</p>
+<p>11.设置启动 切换到<code>/usr/local/mysql/support-files</code>
+<code>cp  mysql.server   /etc/init.d/mysqld</code>
+<code>service  mysqld start</code>//启动</p>
+<p>12.顺便解决下远程连接</p>
+<pre><code>1.vi  /etc/sysconfig/iptables
+</code></pre>
+<p>增加 -A INPUT -m state &ndash;state NEW -m tcp -p tcp &ndash;dport 3306 -j ACCEPT //添加防火墙规则（我一般虚拟机的防火墙直接关掉的大家随意）
+2. 控制台登陆mysql
+3. GRANT ALL PRIVILEGES ON <em>.</em> TO &lsquo;root&rsquo;@'%&lsquo;WITH GRANT OPTION  //授权
+4. flush privileges;
+5. 选择mysql库下的user表
+6. update user set Password=Password(&lsquo;123456&rsquo;) where user='root&rsquo;;//设置密码
+13.大功告成
+14.大家需要自行设置开机启动及服务</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div>
+
+			<div id="gitalk-container"></div>
+			<link rel="stylesheet" href="https://unpkg.com/gitalk@1.6.2/dist/gitalk.css">
+			<script src="https://unpkg.com/gitalk@1.6.2/dist/gitalk.min.js"></script>
+			<script>
+				const gitalk = new Gitalk({
+					clientID: '3dd487777322126558eb',
+					clientSecret: '2c012315b5e837423c278ab38118a50eab662eda',
+					repo: 'fengahan.github.io',
+					owner: 'fengahan',
+					admin: ['fengahan'],
+					id: location.pathname, 
+					distractionFreeMode: false 
+				});
+				(function() {
+					if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+						document.getElementById('gitalk-container').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+						return;
+					}
+					gitalk.render('gitalk-container');
+				})();
+			</script>
+
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2019  © Copyright notice |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>
