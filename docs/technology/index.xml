@@ -18,8 +18,8 @@
       <pubDate>Mon, 24 Aug 2020 21:36:46 +0800</pubDate>
       
       <guid>https://fengahan.github.io/technology/php-auto-generate-route/</guid>
-      <description>后台rabc权限是很普遍的一个应该应用了,目前后台基础框架,一大堆也很少有人去从头开始实现后台基础项目的部署.
-但是如果你找到到基础后台项目还没有实现 通过reflect实现路由到自动到添加和整合,就真的是太out了。。。
+      <description>后台rabc权限是很普遍的一个应该应用了,目前后台基础框架一大堆,也很少有人去从头开始实现后台基础项目的部署.
+但是如果你找到到基础后台项目还没有实现 通过reflect实现路由的自动添加和整合,就真的是太out了。。。
 老规矩 闲话少叙,言归正传。比如我现在写了一个member Controller 内容如下
 &amp;lt;?php Class Member{ public function __construct(){} /** * @return false|string */ public function index(){ return $this-&amp;gt;out([&amp;#39;A&amp;#39;,&amp;#39;B&amp;#39;,&amp;#39;C&amp;#39;,&amp;#39;D&amp;#39;]); } /** * @return false|string */ public function create(){ return $this-&amp;gt;out([&amp;#39;success&amp;#39;]); } /** * @return false|string */ public function update(){ return $this-&amp;gt;out([&amp;#39;success&amp;#39;]); } /** * @return array */ public static function view(){ return []; } /** * @return array */ protected function findModel(){ return []; } /** * @return false|string */ private function out(array $data){ return json_encode($data); } public function __destruct() { return; } }  十年前的方式:</description>
     </item>
