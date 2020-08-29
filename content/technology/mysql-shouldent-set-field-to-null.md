@@ -1,15 +1,15 @@
 ---
 title: "为什么大家都不建议Mysql字段设置为Null"
-date: 2019-07-21T17:09:42+09:15
+date: 2020-08-29T22:55:42+09:15
 description: "Null 在不同语言代表的意义有所不同,所以当我们跨语言的场景Null 就会产生一种歧异,就要有不同的处理。"
 categories: [mysql, linux]
 ---
 
 我们都知道Mysql是一款关系性数据库,大部分应用场景在Web系统,而在我们常见的web系统中所给用户展现的数据类型基本为String和Number(int float等)
-比如 用户的昵称,银行卡余额,我们很少会给用户展现 Object,Resource 以及Array等复合类型或者Resource类型。大部分都是有基础类型组成的json 或者xml
-组成的String或Number 类型
+比如 用户的昵称,银行卡余额,我们很少会给用户展现 Object,Resource 以及Array等复合类型或者Resource类型。大部分都是由String,Number组成的json 或者xml
+类型
 
-Null 在Object-c 和c 语言中一般代表空指针,在js 或者php java 里面可以代表基本类型,加入我们在写一个Api 某个字段返回一个Null(很显然是毫无意义的)
+Null 在Object-c 和c 语言中一般代表空指针,在js 或者php java 里面可以代表基本类型,假如我们在写一个Api 某个字段返回一个Null(很显然是毫无意义的)
 那么对于不同的语言所代表的意义会变得不同,如果稍有处理不当还会引起程序的崩溃。
 
 比如在golang 里是没有Null这个类型的,那么Null的实际意义对于golang来说就是空字符串,golang还需要用Sql.NullString 去接受该值,这或许除了看起来啰嗦
@@ -17,12 +17,14 @@ Null 在Object-c 和c 语言中一般代表空指针,在js 或者php java 里面
 呢？这显然让我们有点束手无策。
 
 不仅是在语言处理上会引起很多注意的地方。
-假设我们有一张表TableA 其中有个email 字段被设置为Null并设置为唯一索引,加入我们因为程序漏洞插入了一条email为Null的行,请问第二次还能不能再次插入email
+假设我们有一张表TableA 其中有个email 字段被设置为Null并设置为唯一索引,我们因为程序不严谨插入了一条email为Null的行,请问第二次还能不能再次插入email
 为Null行。答案可以的.Mysql 允许我们这样做。而且大部分情况下我们发现的问题时候,这样的数据已经出现N次了。将会对我们的系统造成比较严重的后果.而我们设置成
 空字符串就可以避免这样低级错误造成的严重问题。
 
 需要注意的
-1.Mysql 索引问题(篇幅过长不做描述,具体自行搜索)
+
+1.Mysql 的Null造成索引问题(篇幅过长不做描述,具体自行搜索)
+
 2.Null 在排序,统计以及其他Mysql 的聚合函数都会带来不太正确结果,但是结果应该是一至性的,如同样的sql和同样的数据结果总是一致,尽管如此,这对于
 我们来讲基本毫无意义,就像FloatA*FloatB=FloatC,FloatC 或许会溢出或许和正常的计算结果有很大出入,但它始终是一致的。
 
