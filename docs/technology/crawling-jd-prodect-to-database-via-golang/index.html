@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>爬虫京东商品为mysql 生成数据 - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="爬虫京东商品为mysql 生成数据">
-<meta itemprop="description" content="因为服务器要新增3台从数据库 如此大任，舍我其谁 哈哈，所以我 还是先在本地走一遍流程避免线上操做出现问题，为了尽量的模仿线上的情况，写了这个东东 一直插入数据">
-<meta itemprop="datePublished" content="2019-07-18T12:31:58+05:30" />
+<meta itemprop="description" content="因为服务器要新增3台从数据库 如此大任，舍我其谁 哈哈，所以我 还是先在本地走一遍流程避免线上操做出现问题，为了尽量的模仿线上的情况，写了这个东东 一直插入数据"><meta itemprop="datePublished" content="2019-07-18T12:31:58+05:30" />
 <meta itemprop="dateModified" content="2019-07-18T12:31:58+05:30" />
 <meta itemprop="wordCount" content="159">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="爬虫京东商品为mysql 生成数据" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="爬虫京东商品为mysql 生成数据" />
 <meta property="og:description" content="因为服务器要新增3台从数据库 如此大任，舍我其谁 哈哈，所以我 还是先在本地走一遍流程避免线上操做出现问题，为了尽量的模仿线上的情况，写了这个东东 一直插入数据" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/crawling-jd-prodect-to-database-via-golang/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/crawling-jd-prodect-to-database-via-golang/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-07-18T12:31:58+05:30" />
 <meta property="article:modified_time" content="2019-07-18T12:31:58+05:30" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="爬虫京东商品为mysql 生成数据"/>
 <meta name="twitter:description" content="因为服务器要新增3台从数据库 如此大任，舍我其谁 哈哈，所以我 还是先在本地走一遍流程避免线上操做出现问题，为了尽量的模仿线上的情况，写了这个东东 一直插入数据"/>
@@ -94,8 +90,8 @@
 				<p>真心不容易啊 下班了自己的时间在本地做测试。
 因为服务器要新增3台从数据库 如此大任，舍我其谁 哈哈，所以我 还是先在本地走一遍流程避免出现问题，为了尽量的模仿线上的情况，写了这个东东 一直插入数据</p>
 <p>增加从数据库以及使用xtrabackup备份的文章以后再写吧 只是简单记录了笔记没整理 但是代码是现成的 大家拿去用吧</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">
-<span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">
+&lt;?php
 $dsn = <span style="color:#a31515">&#39;mysql:dbname=ff_items;host=192.168.31.123;port=3306&#39;</span>;
 $username = <span style="color:#a31515">&#39;root&#39;</span>;
 $password = <span style="color:#a31515">&#39;123456&#39;</span>;

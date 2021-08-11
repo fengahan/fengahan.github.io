@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Golang之Websocket（接收消息) - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="Golang之Websocket（接收消息)">
-<meta itemprop="description" content="上部分大概讲了下服务端和客户端 针对websocket协议的握手,这次我们再聊聊第二个步骤,针对消息(frams)的处理,大家看代码吧">
-<meta itemprop="datePublished" content="2019-08-22T21:42:18+03:33" />
+<meta itemprop="description" content="上部分大概讲了下服务端和客户端 针对websocket协议的握手,这次我们再聊聊第二个步骤,针对消息(frams)的处理,大家看代码吧"><meta itemprop="datePublished" content="2019-08-22T21:42:18+03:33" />
 <meta itemprop="dateModified" content="2019-08-22T21:42:18+03:33" />
 <meta itemprop="wordCount" content="107">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="Golang之Websocket（接收消息)" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Golang之Websocket（接收消息)" />
 <meta property="og:description" content="上部分大概讲了下服务端和客户端 针对websocket协议的握手,这次我们再聊聊第二个步骤,针对消息(frams)的处理,大家看代码吧" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/golang-websockt-todo2/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/golang-websockt-todo2/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-08-22T21:42:18+03:33" />
 <meta property="article:modified_time" content="2019-08-22T21:42:18+03:33" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang之Websocket（接收消息)"/>
 <meta name="twitter:description" content="上部分大概讲了下服务端和客户端 针对websocket协议的握手,这次我们再聊聊第二个步骤,针对消息(frams)的处理,大家看代码吧"/>
@@ -93,7 +89,7 @@
 			<div class="markdown">
 				<p>具体大家看下代码实现，这里不做过多的赘述,改方式仅仅实现简单的解析 ，然而实际使用中要复杂的多,
 下面的代码只是为了熟悉流程，以及锻炼下从文档到代码的能力</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000">/**
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000">/**
 </span><span style="color:#008000">解包
 </span><span style="color:#008000">*/</span>
 <span style="color:#00f">func</span> getMessageData(conn net.Conn) (<span style="color:#2b91af">error</span>,<span style="color:#2b91af">string</span>) {

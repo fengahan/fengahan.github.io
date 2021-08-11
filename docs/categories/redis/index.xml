@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Copyright notice</copyright>
-    <lastBuildDate>Mon, 25 Nov 2019 13:45:07 +0710</lastBuildDate>
-    
-	<atom:link href="https://fengahan.github.io/categories/redis/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 25 Nov 2019 13:45:07 +0710</lastBuildDate><atom:link href="https://fengahan.github.io/categories/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>简单的讲讲Redis分布式hash到底是啥情况</title>
       <link>https://fengahan.github.io/technology/what-redis-distributed-hash/</link>

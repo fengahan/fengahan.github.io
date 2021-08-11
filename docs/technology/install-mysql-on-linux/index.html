@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>我来在Linux上装个Mysql - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="我来在Linux上装个Mysql">
-<meta itemprop="description" content="想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次">
-<meta itemprop="datePublished" content="2019-07-21T17:09:42+09:15" />
+<meta itemprop="description" content="想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次"><meta itemprop="datePublished" content="2019-07-21T17:09:42+09:15" />
 <meta itemprop="dateModified" content="2019-07-21T17:09:42+09:15" />
 <meta itemprop="wordCount" content="269">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="我来在Linux上装个Mysql" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="我来在Linux上装个Mysql" />
 <meta property="og:description" content="想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/install-mysql-on-linux/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/install-mysql-on-linux/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-07-21T17:09:42+09:15" />
 <meta property="article:modified_time" content="2019-07-21T17:09:42+09:15" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="我来在Linux上装个Mysql"/>
 <meta name="twitter:description" content="想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次"/>
@@ -165,7 +161,7 @@ sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</p>
 3. GRANT ALL PRIVILEGES ON <em>.</em> TO &lsquo;root&rsquo;@'%&lsquo;WITH GRANT OPTION  //授权
 4. flush privileges;
 5. 选择mysql库下的user表
-6. update user set Password=Password(&lsquo;123456&rsquo;) where user='root&rsquo;;//设置密码
+6. update user set Password=Password(&lsquo;123456&rsquo;) where user=&lsquo;root&rsquo;;//设置密码
 13.大功告成
 14.大家需要自行设置开机启动及服务</p>
 

@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>还在手动添加路由进行rabc权限管理,那太out了 - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="还在手动添加路由进行rabc权限管理,那太out了">
-<meta itemprop="description" content="每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式...">
-<meta itemprop="datePublished" content="2020-08-24T21:36:46+08:00" />
-<meta itemprop="dateModified" content="2020-08-24T21:36:46+08:00" />
+<meta itemprop="description" content="每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式..."><meta itemprop="datePublished" content="2020-08-24T21:36:46+00:00" />
+<meta itemprop="dateModified" content="2020-08-24T21:36:46+00:00" />
 <meta itemprop="wordCount" content="338">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="还在手动添加路由进行rabc权限管理,那太out了" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="还在手动添加路由进行rabc权限管理,那太out了" />
 <meta property="og:description" content="每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式..." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/php-auto-generate-route/" />
-<meta property="article:published_time" content="2020-08-24T21:36:46+08:00" />
-<meta property="article:modified_time" content="2020-08-24T21:36:46+08:00" />
+<meta property="og:url" content="https://fengahan.github.io/technology/php-auto-generate-route/" /><meta property="article:section" content="technology" />
+<meta property="article:published_time" content="2020-08-24T21:36:46+00:00" />
+<meta property="article:modified_time" content="2020-08-24T21:36:46+00:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="还在手动添加路由进行rabc权限管理,那太out了"/>
 <meta name="twitter:description" content="每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式..."/>
@@ -95,7 +91,7 @@
 <p>但是如果你找到到基础后台项目还没有实现
 通过reflect实现路由的自动添加和整合,就真的是太out了。。。</p>
 <p>老规矩 闲话少叙,言归正传。比如我现在写了一个member Controller 内容如下</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 
 <span style="color:#00f">Class</span> <span style="color:#2b91af">Member</span>{
 	<span style="color:#00f">public</span> <span style="color:#00f">function</span> __construct(){}
@@ -152,7 +148,7 @@
 <blockquote>
 <p>现在的方式:我们或许只需要一个命令就行了 下面是我们的新类</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 
 <span style="color:#00f">Class</span> <span style="color:#2b91af">Member</span>{
 	<span style="color:#00f">public</span> <span style="color:#00f">function</span> __construct(){
@@ -221,7 +217,7 @@
 <blockquote>
 <p>下面我们开始一系列骚操作</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span> 
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php 
  
  <span style="color:#008000">//Member 当前类名
 </span><span style="color:#008000"></span> $class = <span style="color:#00f">new</span> \ReflectionClass(<span style="color:#a31515">&#39;Member&#39;</span>);

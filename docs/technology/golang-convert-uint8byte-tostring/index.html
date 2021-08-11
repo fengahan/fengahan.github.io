@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>今天有大佬在群里问go的[]uint8怎么转string - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="今天有大佬在群里问go的[]uint8怎么转string">
-<meta itemprop="description" content="之前写过 因为在数据库连表查询的时候会出现null 这个null 在go的sql查询会返回[]uint8 觉得大家都会 也没记录，然后大佬们说百度出来的都不行我才又打算写出来的">
-<meta itemprop="datePublished" content="2019-08-14T16:05:58+05:30" />
+<meta itemprop="description" content="之前写过 因为在数据库连表查询的时候会出现null 这个null 在go的sql查询会返回[]uint8 觉得大家都会 也没记录，然后大佬们说百度出来的都不行我才又打算写出来的"><meta itemprop="datePublished" content="2019-08-14T16:05:58+05:30" />
 <meta itemprop="dateModified" content="2019-08-14T16:05:58+05:30" />
 <meta itemprop="wordCount" content="19">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="今天有大佬在群里问go的[]uint8怎么转string" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="今天有大佬在群里问go的[]uint8怎么转string" />
 <meta property="og:description" content="之前写过 因为在数据库连表查询的时候会出现null 这个null 在go的sql查询会返回[]uint8 觉得大家都会 也没记录，然后大佬们说百度出来的都不行我才又打算写出来的" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/golang-convert-uint8byte-tostring/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/golang-convert-uint8byte-tostring/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-08-14T16:05:58+05:30" />
 <meta property="article:modified_time" content="2019-08-14T16:05:58+05:30" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="今天有大佬在群里问go的[]uint8怎么转string"/>
 <meta name="twitter:description" content="之前写过 因为在数据库连表查询的时候会出现null 这个null 在go的sql查询会返回[]uint8 觉得大家都会 也没记录，然后大佬们说百度出来的都不行我才又打算写出来的"/>
@@ -91,7 +87,7 @@
 			</div>
 					
 			<div class="markdown">
-				<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">
+				<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">
 <span style="color:#00f">var</span> user_nickname []<span style="color:#2b91af">uint8</span>
 b := make([]<span style="color:#2b91af">byte</span>, len(user_nickname))
 <span style="color:#00f">for</span> i, v := <span style="color:#00f">range</span> user_nickname {

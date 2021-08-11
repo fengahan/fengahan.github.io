@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Copyright notice</copyright>
-    <lastBuildDate>Tue, 18 Jun 2019 12:51:18 +0211</lastBuildDate>
-    
-	<atom:link href="https://fengahan.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 18 Jun 2019 12:51:18 +0211</lastBuildDate><atom:link href="https://fengahan.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何在控制台 输出带有颜色 的字体（转载）</title>
       <link>https://fengahan.github.io/technology/stdout-console-color/</link>
@@ -20,7 +16,7 @@
       <guid>https://fengahan.github.io/technology/stdout-console-color/</guid>
       <description>先在终端运行下看下效果
 echo -e &amp;#34;\033[1;31mI ♡ You \e[0m&amp;#34; 请注意，引号内的\e等同于\033；\033、\x1b和\e效果是一样，对应键盘左上角Esc键对应的ASCII码（8进制）； 通用的控制文本颜色的转义序列格式如下：
-CSI n1 [;n2 [;…]] m 其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&amp;rdquo;\033[&amp;quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；
+CSI n1 [;n2 [;…]] m 其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&amp;quot;\033[&amp;quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；
 n1、n2等表示SGR参数（下面会列出一些常用的SGR参数），用于控制颜色、粗体、斜体、闪烁等文本输出格式；m表示转义序列结束。
 颜色参数 常用颜色 格式：\033[显示方式;前景色;背景色m
 说明： 前景色 背景色 颜色

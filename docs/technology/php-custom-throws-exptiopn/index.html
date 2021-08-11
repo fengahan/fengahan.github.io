@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>关于php中自定义错误处理函数遇到的问题 - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="关于php中自定义错误处理函数遇到的问题">
-<meta itemprop="description" content="这两天事情少,所以继续基于swoole扩展的web框架开发,在写自定义错误的处理方式遇到了一些问题特此总结">
-<meta itemprop="datePublished" content="2019-09-01T20:44:58+06:48" />
+<meta itemprop="description" content="这两天事情少,所以继续基于swoole扩展的web框架开发,在写自定义错误的处理方式遇到了一些问题特此总结"><meta itemprop="datePublished" content="2019-09-01T20:44:58+06:48" />
 <meta itemprop="dateModified" content="2019-09-01T20:44:58+06:48" />
 <meta itemprop="wordCount" content="104">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="关于php中自定义错误处理函数遇到的问题" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="关于php中自定义错误处理函数遇到的问题" />
 <meta property="og:description" content="这两天事情少,所以继续基于swoole扩展的web框架开发,在写自定义错误的处理方式遇到了一些问题特此总结" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/php-custom-throws-exptiopn/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/php-custom-throws-exptiopn/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-09-01T20:44:58+06:48" />
 <meta property="article:modified_time" content="2019-09-01T20:44:58+06:48" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="关于php中自定义错误处理函数遇到的问题"/>
 <meta name="twitter:description" content="这两天事情少,所以继续基于swoole扩展的web框架开发,在写自定义错误的处理方式遇到了一些问题特此总结"/>
@@ -93,8 +89,8 @@
 			<div class="markdown">
 				<p>其实遇到问题的原因，是因为打算要用walker 提供的针对mysql 8小时因无数据传输而断开链接进行优化的mysql类，实现思路是在进行sql执行的时候 进行try catch ，然而在第一次执行的
 时候 加入已经断开链接，就输出一条Warning 异常 就是 mysql gone away的错误，因为 文章是隔天写的，所以这里不再展示具体的错误信息,因为我之前自定义了错误处理方式,所以 这条
-warning 就会阻止程序运行而直接给客户端返回500，这样就无法进入catch 于是我想用&rdquo;@&rdquo; 符号去 屏蔽该错误但是还是会输出，下面是之前的错误处理代码</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+warning 就会阻止程序运行而直接给客户端返回500，这样就无法进入catch 于是我想用&quot;@&quot; 符号去 屏蔽该错误但是还是会输出，下面是之前的错误处理代码</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 <span style="color:#00f">class</span> <span style="color:#2b91af">testError</span>{
    <span style="color:#00f">public</span> <span style="color:#00f">function</span> handleError($errno, $errstr, $errfile, $errline)
        {
@@ -111,7 +107,7 @@ warning 就会阻止程序运行而直接给客户端返回500，这样就无法
 
 
 </code></pre></div><p>下面是改进后的代码</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 <span style="color:#00f">class</span> <span style="color:#2b91af">testError</span>{
      <span style="color:#00f">public</span> <span style="color:#00f">function</span> handleError($errno, $errstr, $errfile, $errline)
         {
@@ -130,7 +126,7 @@ warning 就会阻止程序运行而直接给客户端返回500，这样就无法
         
 }
 </code></pre></div><p>没错就是这个</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 <span style="color:#008000">//这段代码在http://php.net/manual/en/function.set-error-handler.php 下面的示例中可以找到搜索error_reporting() == 0
 </span><span style="color:#008000"></span> <span style="color:#00f">if</span> (error_reporting() == 0) {
             <span style="color:#00f">return</span> <span style="color:#00f">true</span>;

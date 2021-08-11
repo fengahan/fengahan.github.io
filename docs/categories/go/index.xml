@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Copyright notice</copyright>
-    <lastBuildDate>Sat, 24 Aug 2019 17:23:11 +0946</lastBuildDate>
-    
-	<atom:link href="https://fengahan.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 24 Aug 2019 17:23:11 +0946</lastBuildDate><atom:link href="https://fengahan.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang之Websocket（发送消息)</title>
       <link>https://fengahan.github.io/technology/golang-websockt-todo3/</link>
@@ -60,7 +56,7 @@ package main import ( &amp;#34;fmt&amp;#34; &amp;#34;net&amp;#34; &amp;#34;strin
       <guid>https://fengahan.github.io/technology/stdout-console-color/</guid>
       <description>先在终端运行下看下效果
 echo -e &amp;#34;\033[1;31mI ♡ You \e[0m&amp;#34; 请注意，引号内的\e等同于\033；\033、\x1b和\e效果是一样，对应键盘左上角Esc键对应的ASCII码（8进制）； 通用的控制文本颜色的转义序列格式如下：
-CSI n1 [;n2 [;…]] m 其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&amp;rdquo;\033[&amp;quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；
+CSI n1 [;n2 [;…]] m 其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&amp;quot;\033[&amp;quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；
 n1、n2等表示SGR参数（下面会列出一些常用的SGR参数），用于控制颜色、粗体、斜体、闪烁等文本输出格式；m表示转义序列结束。
 颜色参数 常用颜色 格式：\033[显示方式;前景色;背景色m
 说明： 前景色 背景色 颜色

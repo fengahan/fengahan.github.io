@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Twitter的分布式自增ID算法snowflake (PHP版) - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="Twitter的分布式自增ID算法snowflake (PHP版)">
-<meta itemprop="description" content="PHP 实现Twitter的分布式自增ID算法snowflake生成唯一ID, 唯一Id 的使用场景非常多,实现方式各不相同，比如用redis的用数据库自增的 但是这两种效率都普遍低下特别是数据库自增 虽然可以为表设置自增步长 增加多台数据库，但是真的很浪费。redis 就不用说了,内存的东西还是不可靠的。下面这个算法来自twitter 自行研究">
-<meta itemprop="datePublished" content="2019-10-26T11:05:58+05:30" />
+<meta itemprop="description" content="PHP 实现Twitter的分布式自增ID算法snowflake生成唯一ID, 唯一Id 的使用场景非常多,实现方式各不相同，比如用redis的用数据库自增的 但是这两种效率都普遍低下特别是数据库自增 虽然可以为表设置自增步长 增加多台数据库，但是真的很浪费。redis 就不用说了,内存的东西还是不可靠的。下面这个算法来自twitter 自行研究"><meta itemprop="datePublished" content="2019-10-26T11:05:58+05:30" />
 <meta itemprop="dateModified" content="2019-10-26T11:05:58+05:30" />
 <meta itemprop="wordCount" content="219">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="Twitter的分布式自增ID算法snowflake (PHP版)" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Twitter的分布式自增ID算法snowflake (PHP版)" />
 <meta property="og:description" content="PHP 实现Twitter的分布式自增ID算法snowflake生成唯一ID, 唯一Id 的使用场景非常多,实现方式各不相同，比如用redis的用数据库自增的 但是这两种效率都普遍低下特别是数据库自增 虽然可以为表设置自增步长 增加多台数据库，但是真的很浪费。redis 就不用说了,内存的东西还是不可靠的。下面这个算法来自twitter 自行研究" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/php-to-do-snowflow-autoid/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/php-to-do-snowflow-autoid/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-10-26T11:05:58+05:30" />
 <meta property="article:modified_time" content="2019-10-26T11:05:58+05:30" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Twitter的分布式自增ID算法snowflake (PHP版)"/>
 <meta name="twitter:description" content="PHP 实现Twitter的分布式自增ID算法snowflake生成唯一ID, 唯一Id 的使用场景非常多,实现方式各不相同，比如用redis的用数据库自增的 但是这两种效率都普遍低下特别是数据库自增 虽然可以为表设置自增步长 增加多台数据库，但是真的很浪费。redis 就不用说了,内存的东西还是不可靠的。下面这个算法来自twitter 自行研究"/>
@@ -92,8 +88,8 @@
 					
 			<div class="markdown">
 				<h3 id="注意-注意注意--重要的事情说三遍--在php-fpm-的运行方式下并不安全-可以用在workman-和swoole-等常驻内存的应用程序上">！！！注意 ！注意！注意  重要的事情说三遍  在Php-fpm 的运行方式下并不安全 可以用在workman 和swoole 等常驻内存的应用程序上</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">
-<span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">
+&lt;?php
 <span style="color:#a31515">/**
 </span><span style="color:#a31515"> * Created by PhpStorm.
 </span><span style="color:#a31515"> * User: hanfeng

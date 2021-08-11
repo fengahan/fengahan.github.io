@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>如何在控制台 输出带有颜色 的字体（转载） - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="如何在控制台 输出带有颜色 的字体（转载）">
-<meta itemprop="description" content="之前这个地方看到过但是没在意,今天打算把自己写的框架 在控制台命令下输出不同的颜色所以就找到了这篇帖子 主要怕 到时候原贴不在了,所以转到博客上来">
-<meta itemprop="datePublished" content="2019-06-18T12:51:18+02:11" />
+<meta itemprop="description" content="之前这个地方看到过但是没在意,今天打算把自己写的框架 在控制台命令下输出不同的颜色所以就找到了这篇帖子 主要怕 到时候原贴不在了,所以转到博客上来"><meta itemprop="datePublished" content="2019-06-18T12:51:18+02:11" />
 <meta itemprop="dateModified" content="2019-06-18T12:51:18+02:11" />
 <meta itemprop="wordCount" content="240">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="如何在控制台 输出带有颜色 的字体（转载）" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="如何在控制台 输出带有颜色 的字体（转载）" />
 <meta property="og:description" content="之前这个地方看到过但是没在意,今天打算把自己写的框架 在控制台命令下输出不同的颜色所以就找到了这篇帖子 主要怕 到时候原贴不在了,所以转到博客上来" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/stdout-console-color/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/stdout-console-color/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-06-18T12:51:18+02:11" />
 <meta property="article:modified_time" content="2019-06-18T12:51:18+02:11" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="如何在控制台 输出带有颜色 的字体（转载）"/>
 <meta name="twitter:description" content="之前这个地方看到过但是没在意,今天打算把自己写的框架 在控制台命令下输出不同的颜色所以就找到了这篇帖子 主要怕 到时候原贴不在了,所以转到博客上来"/>
@@ -92,11 +88,11 @@
 					
 			<div class="markdown">
 				<p>先在终端运行下看下效果</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">echo  -e <span style="color:#a31515">&#34;\033[1;31mI ♡  You \e[0m&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">echo  -e <span style="color:#a31515">&#34;\033[1;31mI ♡  You \e[0m&#34;</span>
 </code></pre></div><p>请注意，引号内的\e等同于\033；\033、\x1b和\e效果是一样，对应键盘左上角Esc键对应的ASCII码（8进制）；
 通用的控制文本颜色的转义序列格式如下：</p>
 <p>CSI n1 [;n2 [;…]] m
-其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&rdquo;\033[&quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；</p>
+其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&quot;\033[&quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；</p>
 <p>n1、n2等表示SGR参数（下面会列出一些常用的SGR参数），用于控制颜色、粗体、斜体、闪烁等文本输出格式；m表示转义序列结束。</p>
 <p>颜色参数
 常用颜色
@@ -199,7 +195,7 @@
 ESC[ … 48;2;<!-- raw HTML omitted -->;<!-- raw HTML omitted -->;<!-- raw HTML omitted --> … m Select RGB background color
 特别注意：此处用法需从38开始设置, 代表前景色，48 代表后景色；2 代表RGB模式，后面三位为RGB数值。前后仍可使用SRG参数</p>
 <p>例子：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo  -e <span style="color:#a31515">&#34;\033[1;38;2;255;85;85mI ♡  You \e[0m&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo  -e <span style="color:#a31515">&#34;\033[1;38;2;255;85;85mI ♡  You \e[0m&#34;</span>
 </code></pre></div><p>附：经测试，在不是用SRG参数的情况下，可将;替换为:但在使用SRG参数时无效。 即：echo -e &ldquo;\033[38:2:255:85:85mI ♡ You \e[0m&rdquo;</p>
 <p>256色模式
 输入图片说明</p>
@@ -207,7 +203,7 @@ ESC[ … 48;2;<!-- raw HTML omitted -->;<!-- raw HTML omitted -->;<!-- raw HTML 
 <p>ESC[ … 38;5;<!-- raw HTML omitted --> … m Select foreground color
 ESC[ … 48;5;<!-- raw HTML omitted --> … m Select background color</p>
 <p>例子：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo  -e <span style="color:#a31515">&#34;\033[1;38;5;9mI ♡  You \e[0m&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo  -e <span style="color:#a31515">&#34;\033[1;38;5;9mI ♡  You \e[0m&#34;</span>
 </code></pre></div><p>SRG控制参数</p>
 <table>
 <thead>
@@ -261,12 +257,12 @@ ESC[ … 48;5;<!-- raw HTML omitted --> … m Select background color</p>
 <p>各语言下的控制台颜色输出
 PHP
 // hello.php</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 <span style="color:#00f">echo</span> <span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;38;5;9mI ♡  You \e[0m</span><span style="color:#a31515">\n</span><span style="color:#a31515">&#34;</span>;
 </code></pre></div><p>请注意此处使用的是&quot;而不是单引号，因为颜色代码需要转义，正如echo的-e一样。</p>
 <p>C
 // hello.c</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00f">#include</span> <span style="color:#00f">&lt;stdio.h&gt;</span><span style="color:#00f">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00f">#include</span> <span style="color:#00f">&lt;stdio.h&gt;</span><span style="color:#00f">
 </span><span style="color:#00f"></span><span style="color:#2b91af">int</span> main() {
     printf(<span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;31mI ♡  You \e[0m</span><span style="color:#a31515">\n</span><span style="color:#a31515">&#34;</span>);
 }
@@ -274,7 +270,7 @@ PHP
 <p>运行：./a.out</p>
 <p>C++
 // hello.cpp</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00f">#include</span> <span style="color:#00f">&lt;iostream&gt;</span><span style="color:#00f">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00f">#include</span> <span style="color:#00f">&lt;iostream&gt;</span><span style="color:#00f">
 </span><span style="color:#00f"></span><span style="color:#2b91af">int</span> main() {
     std::cout &lt;&lt; <span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;31mI ♡  You \e[0m&#34;</span> &lt;&lt; std::endl;
 }
@@ -282,7 +278,7 @@ PHP
 <p>运行：./a.out</p>
 <p>Java
 // hello.java</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">class</span> <span style="color:#2b91af">hello</span> {
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">class</span> <span style="color:#2b91af">hello</span> {
     <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) {
        System.out.println(<span style="color:#a31515">&#34;\033[1;31mI ♡  You \033[0m&#34;</span>);
     }
@@ -292,7 +288,7 @@ PHP
 <p>运行：java hello</p>
 <p>Python
 hello.py</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">print</span> <span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;31mI ♡  You </span><span style="color:#a31515">\x1b</span><span style="color:#a31515">[0m&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print <span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;31mI ♡  You </span><span style="color:#a31515">\x1b</span><span style="color:#a31515">[0m&#34;</span>
 
 </code></pre></div><p>注：python（v2.6.5）中不能识别\e，可以使用\033和\x1b。</p>
 <p>非常地道的贴上原文地址：https://phperzh.com/wr?u=https%3a%2f%2fmy.oschina.net%2fdingdayu%2fblog%2f1537064</p>

@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>PHP利用stack(栈)写了个简单都计算器 - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="PHP利用stack(栈)写了个简单都计算器">
-<meta itemprop="description" content="本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)">
-<meta itemprop="datePublished" content="2020-08-14T20:11:19+06:59" />
+<meta itemprop="description" content="本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)"><meta itemprop="datePublished" content="2020-08-14T20:11:19+06:59" />
 <meta itemprop="dateModified" content="2020-08-14T20:11:19+06:59" />
 <meta itemprop="wordCount" content="322">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="PHP利用stack(栈)写了个简单都计算器" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="PHP利用stack(栈)写了个简单都计算器" />
 <meta property="og:description" content="本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/php-todo-simplae-opernumber/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/php-todo-simplae-opernumber/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2020-08-14T20:11:19+06:59" />
 <meta property="article:modified_time" content="2020-08-14T20:11:19+06:59" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PHP利用stack(栈)写了个简单都计算器"/>
 <meta name="twitter:description" content="本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)"/>
@@ -93,7 +89,7 @@
 			<div class="markdown">
 				<p>废话少说先上代码才是好汉,其核心部分为将人们平常用的中缀表达式(运算符在中间)转换为后缀表达式。计算的时候只需先</p>
 <p>依次读出符号再读出该符号前两个数字即可,以下一个简单的示列:代码写的很丑 请务嘲笑😊</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&lt;?php
 <span style="color:#a31515">/**
 </span><span style="color:#a31515"> *
 </span><span style="color:#a31515"> * php 实现基本的计算器 支持+ - * / 以及优先运算符()

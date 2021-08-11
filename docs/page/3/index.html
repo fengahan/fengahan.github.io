@@ -77,59 +77,17 @@
 						<div class="post-header">
 							<div class="meta">
 								<div class="date">
-									<span class="day">10</span>
-							<span class="rest">八月 2021</span>
+									<span class="day">21</span>
+							<span class="rest">八月 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/technology/find-string-by-string-cut/">如何判断字符串ABCDE中是否 &#39;单独&#39; 存在BCD</a>
+									<a href="/technology/golang-websockt-todo1/">Golang之Websocket（握手)</a>
 								</h4>
 								<span class="description">
 									
-										具体的业务场景不便透露。如何从ABCDE中判断是否存在BCD 字串 如A BCD E 为存在,A BCDE为不存在
-									
-								</span>
-							</div>
-						</div>
-					</div>
-				
-					<div class="post">
-						<div class="post-header">
-							<div class="meta">
-								<div class="date">
-									<span class="day">29</span>
-							<span class="rest">八月 2020</span>
-								</div>
-							</div>
-							<div class="matter">
-								<h4 class="title small">
-									<a href="/technology/mysql-shouldent-set-field-to-null/">为什么大家都不建议Mysql字段设置为Null</a>
-								</h4>
-								<span class="description">
-									
-										Null 在不同语言代表的意义有所不同,所以当我们跨语言的场景Null 就会产生一种歧异,就要有不同的处理。
-									
-								</span>
-							</div>
-						</div>
-					</div>
-				
-					<div class="post">
-						<div class="post-header">
-							<div class="meta">
-								<div class="date">
-									<span class="day">24</span>
-							<span class="rest">八月 2020</span>
-								</div>
-							</div>
-							<div class="matter">
-								<h4 class="title small">
-									<a href="/technology/php-auto-generate-route/">还在手动添加路由进行rabc权限管理,那太out了</a>
-								</h4>
-								<span class="description">
-									
-										每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式...
+										空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手  2.发送Frames, 3.接收Frames
 									
 								</span>
 							</div>
@@ -141,16 +99,16 @@
 							<div class="meta">
 								<div class="date">
 									<span class="day">14</span>
-							<span class="rest">八月 2020</span>
+							<span class="rest">八月 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/technology/php-todo-simplae-opernumber/">PHP利用stack(栈)写了个简单都计算器</a>
+									<a href="/technology/golang-convert-uint8byte-tostring/">今天有大佬在群里问go的[]uint8怎么转string</a>
 								</h4>
 								<span class="description">
 									
-										本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)
+										之前写过 因为在数据库连表查询的时候会出现null 这个null 在go的sql查询会返回[]uint8 觉得大家都会 也没记录，然后大佬们说百度出来的都不行我才又打算写出来的
 									
 								</span>
 							</div>
@@ -161,17 +119,59 @@
 						<div class="post-header">
 							<div class="meta">
 								<div class="date">
-									<span class="day">25</span>
-							<span class="rest">十一月 2019</span>
+									<span class="day">21</span>
+							<span class="rest">七月 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/technology/what-redis-distributed-hash/">简单的讲讲Redis分布式hash到底是啥情况</a>
+									<a href="/technology/install-mysql-on-linux/">我来在Linux上装个Mysql</a>
 								</h4>
 								<span class="description">
 									
-										话说分布式一致性Hash可以理解为 放在什么圆环上。长篇大论的讲的我没兴趣看下去，其实最简单的一句话就是普通hash 是按照key值找server 而分布式hash 是按照key值所在的server(hash值)的范围找server。
+										想想上次装MySQL不知道是什么时候了,这种操作 很少用, 毕竟之前都是用服务器镜像搞定的。本地环境呢 为了省事又是lnmp 一键安装包，最近又自己新买了阿里的服务器，闲着没什么用所以打算装个MySQL 用在博客上,之前的笔记不知道去哪了，所再记录一次
+									
+								</span>
+							</div>
+						</div>
+					</div>
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">18</span>
+							<span class="rest">七月 2019</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/technology/crawling-jd-prodect-to-database-via-golang/">爬虫京东商品为mysql 生成数据</a>
+								</h4>
+								<span class="description">
+									
+										因为服务器要新增3台从数据库 如此大任，舍我其谁 哈哈，所以我 还是先在本地走一遍流程避免线上操做出现问题，为了尽量的模仿线上的情况，写了这个东东 一直插入数据
+									
+								</span>
+							</div>
+						</div>
+					</div>
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">12</span>
+							<span class="rest">七月 2019</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/technology/find-a-bug-of-redis1-on-php7/">Redis2.8 在PHP7.2 下的一个Bug</a>
+								</h4>
+								<span class="description">
+									
+										redis2.8版本在php7.2 下 sscan 命令不可用,不知道是什么原因，但是在5.6下是正常的。等以后再次搭建lnmp 换个7 的其它版本试试
 									
 								</span>
 							</div>
@@ -183,10 +183,12 @@
 <ul class="pagination">
 	<li class="page-item page-prev">
 	
+    <a href="/page/2/" class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev page</span></a>
+	
 	</li>
 	<li class="page-item page-next">
 	
-    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">Next page →</span></a>
+    <a href="/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">Next page →</span></a>
 	
 	</li>
 </ul>

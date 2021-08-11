@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Copyright notice</copyright>
-    <lastBuildDate>Sat, 24 Aug 2019 17:23:11 +0946</lastBuildDate>
-    
-	<atom:link href="https://fengahan.github.io/categories/websocket/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 24 Aug 2019 17:23:11 +0946</lastBuildDate><atom:link href="https://fengahan.github.io/categories/websocket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang之Websocket（发送消息)</title>
       <link>https://fengahan.github.io/technology/golang-websockt-todo3/</link>

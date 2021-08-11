@@ -4,20 +4,16 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Golang之Websocket（握手) - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="Golang之Websocket（握手)">
-<meta itemprop="description" content="空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手  2.发送Frames, 3.接收Frames">
-<meta itemprop="datePublished" content="2019-08-21T17:22:48+06:33" />
+<meta itemprop="description" content="空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手  2.发送Frames, 3.接收Frames"><meta itemprop="datePublished" content="2019-08-21T17:22:48+06:33" />
 <meta itemprop="dateModified" content="2019-08-21T17:22:48+06:33" />
 <meta itemprop="wordCount" content="239">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta property="og:title" content="Golang之Websocket（握手)" />
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Golang之Websocket（握手)" />
 <meta property="og:description" content="空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手  2.发送Frames, 3.接收Frames" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fengahan.github.io/technology/golang-websockt-todo1/" />
+<meta property="og:url" content="https://fengahan.github.io/technology/golang-websockt-todo1/" /><meta property="article:section" content="technology" />
 <meta property="article:published_time" content="2019-08-21T17:22:48+06:33" />
 <meta property="article:modified_time" content="2019-08-21T17:22:48+06:33" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang之Websocket（握手)"/>
 <meta name="twitter:description" content="空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手  2.发送Frames, 3.接收Frames"/>
@@ -94,7 +90,7 @@
 				<p>空闲时间不多,而且之前对这块不是特别深入,所以呢这部分打算分三部分写分别为 1.握手  2.发送Frames, 3.接收Frames
 关于websocket 的握手大家可以wiki上面看一下,下面是我的golang 实现捂手部分
 参考文献<a href="http://www.rfcreader.com/#rfc6455">RFC6455</a> 和 <a href="https://www.cnblogs.com/songwenjie/p/8575579.html">webcoket分析</a></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
 
 <span style="color:#00f">import</span> (
 	<span style="color:#a31515">&#34;fmt&#34;</span>

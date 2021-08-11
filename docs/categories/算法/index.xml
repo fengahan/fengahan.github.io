@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Copyright notice</copyright>
-    <lastBuildDate>Fri, 14 Aug 2020 20:11:19 +0659</lastBuildDate>
-    
-	<atom:link href="https://fengahan.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 10 Aug 2021 20:44:58 +0648</lastBuildDate><atom:link href="https://fengahan.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何判断字符串ABCDE中是否 &#39;单独&#39; 存在BCD</title>
+      <link>https://fengahan.github.io/technology/find-string-by-string-cut/</link>
+      <pubDate>Tue, 10 Aug 2021 20:44:58 +0648</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/find-string-by-string-cut/</guid>
+      <description>需求:如何从ABCDE中判断是否存在BCD为单独存在
+ 分析
+ 存在:
+ A BCD E AE BCD BCD AE BCD 空格+BCD  不存在:
+ ABC DE ABCDE A BCED 更多。。。。  经上述分析可以得到 BCD 前后仅能同时存在一个空格或者无空格。这种需求最简单最直接最有效的方式就是正则匹配 它更容易让人理解。下面是同事写的正则匹配。
+&amp;lt;? php $str=&amp;#34;ABCDE&amp;#34;; if(preg_match(&amp;#39;/^(BCD)$|^((BCD)\s+)|(\s+(BCD)\s+)|\s+(BCD)$/&amp;#39;,$str)){ echo &amp;#34;单独存在BCD&amp;#34; }else{ echo &amp;#34;XXXXXX&amp;#34;; } 如果仅仅满足业务以上代码足以,但是我没有用正则的习惯，所以当我遇到问题的时候对正则的方案也没有 多加考虑,便花了点时间写了个字符串处理版本,在看下面的代码的之前 我建议呢 先熟悉下php自带的几个 非常常用的函数 它们非常有用而且高效。请多了解了解它们，也比较建议了解各个函数的实现方法,你一定 大有收获。
+ stripos stristr str_replace mb_strlen  上面的函数你可能用过一些,但是呢也可能你所用到的只是他们用法的一部分 比如str_replace 就有两种 用法。同时在手册上你查看某个函数 它还会推荐给你 一些相关或相似的函数，所以多看手册是一个php开发 的基本素养0_0
+废话不多说 show me code
+=======================
+&amp;lt;?php function find($chars,$value) { $_chars=$chars;//字符串 的子串  $number=mb_strlen($chars);//字符串的总长度  $value_count=mb_strlen($value);//当前验证的字符长度  while (mb_strlen($_chars)&amp;gt;$value_count &amp;amp;&amp;amp; $number&amp;gt;0){ $number--;//避免特殊情况或者算法bug 造成无限循环  $pos=stripos($_chars,$value); if ($pos !</description>
+    </item>
     
     <item>
       <title>PHP利用stack(栈)写了个简单都计算器</title>
