@@ -1,6 +1,6 @@
 ---
 title: "如何判断字符串ABCDE中是否 '单独' 存在BCD"
-date: 2021-08-01T20:44:58+06:48
+date: 2021-08-10T20:44:58+06:48
 description: "具体的业务场景不便透露。如何从ABCDE中判断是否存在BCD 字串 如A BCD E 为存在,A BCDE为不存在"
 categories: [php,算法]
 draft: false
