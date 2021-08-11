@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>PHP利用stack(栈)写了个简单都计算器 - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="PHP利用stack(栈)写了个简单都计算器">
+<meta itemprop="description" content="本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)">
+<meta itemprop="datePublished" content="2020-08-14T20:11:19+06:59" />
+<meta itemprop="dateModified" content="2020-08-14T20:11:19+06:59" />
+<meta itemprop="wordCount" content="322">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta property="og:title" content="PHP利用stack(栈)写了个简单都计算器" />
+<meta property="og:description" content="本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fengahan.github.io/technology/php-todo-simplae-opernumber/" />
+<meta property="article:published_time" content="2020-08-14T20:11:19+06:59" />
+<meta property="article:modified_time" content="2020-08-14T20:11:19+06:59" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PHP利用stack(栈)写了个简单都计算器"/>
+<meta name="twitter:description" content="本身想用go写个微信小程序都template Dom解析的 但是无奈能力有限,不过让我了解到类似html的dom解析无法通过简单的正则实现。而是需要stack(栈)"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://fengahan.github.io/css/dark.css" />
+
+	<script src="https://fengahan.github.io/js/feather.min.js"></script>
+	
+		<script src="https://fengahan.github.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://fengahan.github.io/">
+				<img src="https://s1.ax1x.com/2020/08/22/dds4bR.png" alt="走狗" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://fengahan.github.io/">走狗</a></h1>
+	<div class="site-description"><p>知识是有限的,想象力是无限的。-Albert Einstein</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/fengahan" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
+		</nav><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">首页</a>
+			</li>
+			
+			<li>
+				<a href="/technology">技术</a>
+			</li>
+			
+			<li>
+				<a href="/life">生活</a>
+			</li>
+			
+			<li>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/about">关于me</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">14</span>
+							<span class="rest">八月 2020</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">PHP利用stack(栈)写了个简单都计算器</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>废话少说先上代码才是好汉,其核心部分为将人们平常用的中缀表达式(运算符在中间)转换为后缀表达式。计算的时候只需先</p>
+<p>依次读出符号再读出该符号前两个数字即可,以下一个简单的示列:代码写的很丑 请务嘲笑😊</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#a31515">/**
+</span><span style="color:#a31515"> *
+</span><span style="color:#a31515"> * php 实现基本的计算器 支持+ - * / 以及优先运算符()
+</span><span style="color:#a31515"> * 仅支持(个位数)不支持小数点和多位数
+</span><span style="color:#a31515"> * 仅需要简单修改即可支持小数点和多位数(思路:scan中缀表达式的时候进行正则匹配数字)。
+</span><span style="color:#a31515"> */</span>
+
+<span style="color:#00f">const</span> OADD = 1;
+<span style="color:#00f">const</span> OSUB = 1;
+<span style="color:#00f">const</span> OMUL = 2;
+<span style="color:#00f">const</span> ODIV = 2;
+
+$oper_stack = <span style="color:#00f">array</span>();
+$number_stack = <span style="color:#00f">array</span>();
+<span style="color:#a31515">/**
+</span><span style="color:#a31515"> 转逆波兰表达式
+</span><span style="color:#a31515">*/</span>
+$sym = <span style="color:#a31515">&#34;1+(2+3)*4-8/4+3*(2+1)&#34;</span>;
+$sym_len = mb_strlen($sym);
+<span style="color:#00f">for</span> ($i = 0; $i &lt; $sym_len; $i++) {
+    $char = $sym[$i];
+    <span style="color:#00f">if</span> (ctype_digit($char)) {<span style="color:#008000">//数字
+</span><span style="color:#008000"></span>        array_push($number_stack, $char);
+    } <span style="color:#00f">else</span> {<span style="color:#008000">//操作符号
+</span><span style="color:#008000"></span>            <span style="color:#00f">if</span> ((<span style="color:#00f">empty</span>($oper_stack) || $char == <span style="color:#a31515">&#34;(&#34;</span>) &amp;&amp; $char != <span style="color:#a31515">&#39;)&#39;</span>) {
+                array_push($oper_stack, $char);
+            } <span style="color:#00f">else</span> <span style="color:#00f">if</span> ($char != <span style="color:#a31515">&#34;)&#34;</span>) {
+                $pre=end($oper_stack);
+                <span style="color:#00f">if</span>($pre!=<span style="color:#a31515">&#34;(&#34;</span>){
+                    $pc=count($oper_stack);
+                    <span style="color:#00f">for</span> ($e = 0; $e &lt; $pc+1; $e++) {
+                        <span style="color:#00f">if</span> (<span style="color:#00f">empty</span>($oper_stack) ) {
+                            array_push($oper_stack, $char);
+                            <span style="color:#00f">break</span>;
+                        }
+                        <span style="color:#00f">if</span> (OperToInt($char) &gt; OperToint($pre)) {
+                            array_push($oper_stack, $char);
+                            <span style="color:#00f">break</span>;
+                        } <span style="color:#00f">else</span> {
+                            $pop = array_pop($oper_stack);
+                            array_push($number_stack, $pop);
+                        }
+                    }
+                }<span style="color:#00f">else</span>{
+                    array_push($oper_stack,$char);
+                }
+            } <span style="color:#00f">else</span> <span style="color:#00f">if</span> ($char == <span style="color:#a31515">&#39;)&#39;</span>) {
+                <span style="color:#00f">for</span> ($k = 0; $k &lt; count($oper_stack); $k++) {
+                    $pop = array_pop($oper_stack);
+                    <span style="color:#00f">if</span> ($pop != <span style="color:#a31515">&#34;(&#34;</span>) {
+                        array_push($number_stack, $pop);
+                    }
+                }
+            }
+     }
+}
+
+<span style="color:#00f">function</span> OperToInt($oper)
+{
+    <span style="color:#00f">if</span> ($oper == <span style="color:#a31515">&#34;+&#34;</span> || $oper == <span style="color:#a31515">&#34;-&#34;</span>) {
+        $flag = 1;
+    } <span style="color:#00f">elseif</span> ($oper == <span style="color:#a31515">&#34;*&#34;</span> || $oper == <span style="color:#a31515">&#34;/&#34;</span>) {
+        $flag = 2;
+    }
+    <span style="color:#00f">return</span> $flag;
+}
+<span style="color:#a31515">/***
+</span><span style="color:#a31515">计算过程
+</span><span style="color:#a31515">***/</span>
+
+<span style="color:#00f">for</span> ($i = 0; $i &lt;= count($oper_stack); $i++) {
+
+    $pop = array_pop($oper_stack);
+    <span style="color:#00f">if</span> (!<span style="color:#00f">empty</span>($pop)) {
+        array_push($number_stack, $pop);
+    }
+}
+<span style="color:#00f">for</span> ($i = 0; $i &lt; count($number_stack) + 1; $i++) {
+    $pop = $number_stack[$i];
+    $res .= $pop . <span style="color:#a31515">&#39; &#39;</span>;
+}
+$number_exp = preg_split(<span style="color:#a31515">&#34;/[\s]+/&#34;</span>, trim($res), -1, PREG_SPLIT_NO_EMPTY);
+$res_stack = [];
+<span style="color:#00f">echo</span>  $res.<span style="color:#a31515">&#34;</span><span style="color:#a31515">\n\r</span><span style="color:#a31515">&#34;</span>;
+<span style="color:#00f">for</span> ($i = 0; $i &lt; count($number_exp); $i++) {
+    <span style="color:#00f">if</span> (ctype_digit($number_exp[$i])) {
+        array_push($res_stack, $number_exp[$i]);
+    } <span style="color:#00f">else</span> {
+        $num1 = array_pop($res_stack);
+        $num2 = array_pop($res_stack);
+        <span style="color:#00f">if</span> ($number_exp[$i] == <span style="color:#a31515">&#34;+&#34;</span>) {
+            $res = $num2 + $num1;
+        }
+        <span style="color:#00f">if</span> ($number_exp[$i] == <span style="color:#a31515">&#34;-&#34;</span>) {
+            $res = $num2 - $num1;
+        }
+        <span style="color:#00f">if</span> ($number_exp[$i] == <span style="color:#a31515">&#34;*&#34;</span>) {
+            $res = $num2 * $num1;
+        }
+        <span style="color:#00f">if</span> ($number_exp[$i] == <span style="color:#a31515">&#34;/&#34;</span>) {
+            $res = $num2 / $num1;
+        }
+        array_push($res_stack, $res);
+    }
+}
+<span style="color:#00f">echo</span> sprintf(<span style="color:#a31515">&#34;%s的结果为%d&#34;</span>,$sym,$res_stack[0]);
+
+</code></pre></div><p>网上盗了一张图:
+<img src="https://s1.ax1x.com/2020/08/23/d0BnjH.png" alt="阿大博客"></p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div>
+
+			<div id="gitalk-container"></div>
+			<link rel="stylesheet" href="https://unpkg.com/gitalk@1.6.2/dist/gitalk.css">
+			<script src="https://unpkg.com/gitalk@1.6.2/dist/gitalk.min.js"></script>
+			<script>
+				const gitalk = new Gitalk({
+					clientID: '3dd487777322126558eb',
+					clientSecret: '2c012315b5e837423c278ab38118a50eab662eda',
+					repo: 'fengahan.github.io',
+					owner: 'fengahan',
+					admin: ['fengahan'],
+					id: location.pathname, 
+					distractionFreeMode: false 
+				});
+				(function() {
+					if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+						document.getElementById('gitalk-container').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+						return;
+					}
+					gitalk.render('gitalk-container');
+				})();
+			</script>
+
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2020  © Copyright notice |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

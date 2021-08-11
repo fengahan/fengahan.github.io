@@ -1,0 +1,85 @@
+baseURL = "https://fengahan.github.io/"
+languageCode = "en-us"
+title = "走狗"
+theme = "hugo-ink"
+paginate = 5
+
+copyright = "© Copyright notice"
+pygmentsstyle = "vs"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+googleAnalytics = "UA-123-45"
+#disqusShortname = "ink-demo"
+
+[params]
+	subtitle = "知识是有限的,想象力是无限的。-Albert Einstein"
+
+	# Optional 64x64 avatar image.
+	avatar = "https://s1.ax1x.com/2020/08/22/dds4bR.png"
+
+	# Content types to disable Disqus on.
+	#disableDisqusTypes = ["page"]
+	
+	#featherIconsCDN = true
+
+	mode = "auto" # "dark" or "auto"
+	# customCSS = "css/custom.css"  # Custom CSS applied to default styles.
+	# customDarkCSS = "css/custom-dark.css"  # Custom styles applied to dark mode css.
+	# customJS = ["js/custom.js", "js/custom1.js"]  # Custom JS scripts.
+    enableGitalk = true
+
+# Nav.
+[[menu.main]]
+name = "首页"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "技术"
+url = "/technology"
+weight = 2
+
+
+[[menu.main]]
+name = "生活"
+url = "/life"
+weight = 3
+
+[[menu.main]]
+name = "分类"
+url = "/categories"
+weight =4
+
+
+[[menu.main]]
+name = "关于me"
+url = "/about"
+weight = 8
+
+[[params.social]]
+name = "Github"
+icon = "github"
+url = "https://github.com/fengahan"
+
+[[params.social]]
+name = "RSS"
+icon = "rss"
+url = "/index.xml"
+[Data]
+ Term="aasd"
+[params.Gitalk]
+  clientID = "3dd487777322126558eb" # Your client ID
+  clientSecret = "2c012315b5e837423c278ab38118a50eab662eda" # Your client secret
+  repo = "fengahan.github.io" # The repo to store comments
+  owner = "fengahan" # Your GitHub ID
+  admin= "fengahan" # Required. Github repository owner and collaborators. (Users who having write access to this repository)
+  id= "location.pathname" # The unique id of the page.
+  labels= "gitalk" # Github issue labels. If you used to use Gitment, you can change it
+  perPage= 15 # Pagination size, with maximum 100.
+  pagerDirection= "last" # Comment sorting direction, available values are 'last' and 'first'.
+  createIssueManually= false # If it is 'false', it is auto to make a Github issue when the administrators login.
+  distractionFreeMode= false # Enable hot key (cmd|ctrl + enter) submit comment.
+
+[taxonomies]
+   category= "categories"

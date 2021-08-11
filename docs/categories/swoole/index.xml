@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>swoole on 走狗</title>
+    <link>https://fengahan.github.io/categories/swoole/</link>
+    <description>Recent content in swoole on 走狗</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Copyright notice</copyright>
+    <lastBuildDate>Sun, 01 Sep 2019 20:44:58 +0648</lastBuildDate>
+    
+	<atom:link href="https://fengahan.github.io/categories/swoole/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于php中自定义错误处理函数遇到的问题</title>
+      <link>https://fengahan.github.io/technology/php-custom-throws-exptiopn/</link>
+      <pubDate>Sun, 01 Sep 2019 20:44:58 +0648</pubDate>
+      
+      <guid>https://fengahan.github.io/technology/php-custom-throws-exptiopn/</guid>
+      <description>其实遇到问题的原因，是因为打算要用walker 提供的针对mysql 8小时因无数据传输而断开链接进行优化的mysql类，实现思路是在进行sql执行的时候 进行try catch ，然而在第一次执行的 时候 加入已经断开链接，就输出一条Warning 异常 就是 mysql gone away的错误，因为 文章是隔天写的，所以这里不再展示具体的错误信息,因为我之前自定义了错误处理方式,所以 这条 warning 就会阻止程序运行而直接给客户端返回500，这样就无法进入catch 于是我想用&amp;rdquo;@&amp;rdquo; 符号去 屏蔽该错误但是还是会输出，下面是之前的错误处理代码
+&amp;lt;?php class testError{ public function handleError($errno, $errstr, $errfile, $errline) { $this-&amp;gt;context-&amp;gt;sendCode(500); $this-&amp;gt;context-&amp;gt;send(&amp;#34;Internals Server Error&amp;#34;); $errName=$this-&amp;gt;getErrorName($errno); $message= &amp;#34;$errName$errstron line $errlinein file $errfile&amp;#34;.PHP_EOL; $err= &amp;#34;\033[0;33m {$message}\e \033[0m&amp;#34;.PHP_EOL; $this-&amp;gt;renderError($err); return true; } } 下面是改进后的代码
+&amp;lt;?php class testError{ public function handleError($errno, $errstr, $errfile, $errline) { if (error_reporting() == 0) {//如果不加这个将会怎么呢怎么呢 @符号将无法抑制错误输出  return true; } $this-&amp;gt;context-&amp;gt;sendCode(500); $this-&amp;gt;context-&amp;gt;send(&amp;#34;Internals Server Error&amp;#34;); $errName=$this-&amp;gt;getErrorName($errno); $message= &amp;#34;$errName$errstron line $errlinein file $errfile&amp;#34;; $err= &amp;#34;\033[0;33m {$message}\e \033[0m&amp;#34;.</description>
+    </item>
+    
+  </channel>
+</rss>

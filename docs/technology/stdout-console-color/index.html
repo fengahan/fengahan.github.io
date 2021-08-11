@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>如何在控制台 输出带有颜色 的字体（转载） - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="如何在控制台 输出带有颜色 的字体（转载）">
+<meta itemprop="description" content="之前这个地方看到过但是没在意,今天打算把自己写的框架 在控制台命令下输出不同的颜色所以就找到了这篇帖子 主要怕 到时候原贴不在了,所以转到博客上来">
+<meta itemprop="datePublished" content="2019-06-18T12:51:18+02:11" />
+<meta itemprop="dateModified" content="2019-06-18T12:51:18+02:11" />
+<meta itemprop="wordCount" content="240">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta property="og:title" content="如何在控制台 输出带有颜色 的字体（转载）" />
+<meta property="og:description" content="之前这个地方看到过但是没在意,今天打算把自己写的框架 在控制台命令下输出不同的颜色所以就找到了这篇帖子 主要怕 到时候原贴不在了,所以转到博客上来" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fengahan.github.io/technology/stdout-console-color/" />
+<meta property="article:published_time" content="2019-06-18T12:51:18+02:11" />
+<meta property="article:modified_time" content="2019-06-18T12:51:18+02:11" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何在控制台 输出带有颜色 的字体（转载）"/>
+<meta name="twitter:description" content="之前这个地方看到过但是没在意,今天打算把自己写的框架 在控制台命令下输出不同的颜色所以就找到了这篇帖子 主要怕 到时候原贴不在了,所以转到博客上来"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://fengahan.github.io/css/dark.css" />
+
+	<script src="https://fengahan.github.io/js/feather.min.js"></script>
+	
+		<script src="https://fengahan.github.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://fengahan.github.io/">
+				<img src="https://s1.ax1x.com/2020/08/22/dds4bR.png" alt="走狗" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://fengahan.github.io/">走狗</a></h1>
+	<div class="site-description"><p>知识是有限的,想象力是无限的。-Albert Einstein</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/fengahan" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
+		</nav><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">首页</a>
+			</li>
+			
+			<li>
+				<a href="/technology">技术</a>
+			</li>
+			
+			<li>
+				<a href="/life">生活</a>
+			</li>
+			
+			<li>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/about">关于me</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">18</span>
+							<span class="rest">六月 2019</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">如何在控制台 输出带有颜色 的字体（转载）</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>先在终端运行下看下效果</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">echo  -e <span style="color:#a31515">&#34;\033[1;31mI ♡  You \e[0m&#34;</span>
+</code></pre></div><p>请注意，引号内的\e等同于\033；\033、\x1b和\e效果是一样，对应键盘左上角Esc键对应的ASCII码（8进制）；
+通用的控制文本颜色的转义序列格式如下：</p>
+<p>CSI n1 [;n2 [;…]] m
+其中CSI全称为“控制序列引导器”（Control Sequence Introducer/Initiator），也就是上述示例中的&rdquo;\033[&quot;（其中\033是你键盘左上角Esc键对应的ascii码（八进制））；</p>
+<p>n1、n2等表示SGR参数（下面会列出一些常用的SGR参数），用于控制颜色、粗体、斜体、闪烁等文本输出格式；m表示转义序列结束。</p>
+<p>颜色参数
+常用颜色
+格式：\033[显示方式;前景色;背景色m</p>
+<p>说明：
+前景色            背景色           颜色</p>
+<table>
+<thead>
+<tr>
+<th>前景色</th>
+<th>背景色</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>40</td>
+<td>黑色</td>
+</tr>
+<tr>
+<td>31</td>
+<td>41</td>
+<td>红色</td>
+</tr>
+<tr>
+<td>32</td>
+<td>42</td>
+<td>绿色</td>
+</tr>
+<tr>
+<td>33</td>
+<td>43</td>
+<td>黃色</td>
+</tr>
+<tr>
+<td>34</td>
+<td>44</td>
+<td>蓝色</td>
+</tr>
+<tr>
+<td>35</td>
+<td>45</td>
+<td>紫红色</td>
+</tr>
+<tr>
+<td>36</td>
+<td>46</td>
+<td>青蓝色</td>
+</tr>
+<tr>
+<td>37</td>
+<td>47</td>
+<td>白色</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>终端默认设置</td>
+</tr>
+<tr>
+<td>1</td>
+<td>高亮显示</td>
+</tr>
+<tr>
+<td>4</td>
+<td>使用下划线</td>
+</tr>
+<tr>
+<td>5</td>
+<td>闪烁</td>
+</tr>
+<tr>
+<td>7</td>
+<td>反白显示</td>
+</tr>
+<tr>
+<td>8</td>
+<td>不可见</td>
+</tr>
+</tbody>
+</table>
+<p>例子：
+\033[1;31;40m    <!-- raw HTML omitted -->
+\033[0m          <!-- raw HTML omitted -->
+输入图片说明</p>
+<p>RGB颜色
+输入图片说明</p>
+<p>使用方式：</p>
+<p>ESC[ … 38;2;<!-- raw HTML omitted -->;<!-- raw HTML omitted -->;<!-- raw HTML omitted --> … m Select RGB foreground color
+ESC[ … 48;2;<!-- raw HTML omitted -->;<!-- raw HTML omitted -->;<!-- raw HTML omitted --> … m Select RGB background color
+特别注意：此处用法需从38开始设置, 代表前景色，48 代表后景色；2 代表RGB模式，后面三位为RGB数值。前后仍可使用SRG参数</p>
+<p>例子：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo  -e <span style="color:#a31515">&#34;\033[1;38;2;255;85;85mI ♡  You \e[0m&#34;</span>
+</code></pre></div><p>附：经测试，在不是用SRG参数的情况下，可将;替换为:但在使用SRG参数时无效。 即：echo -e &ldquo;\033[38:2:255:85:85mI ♡ You \e[0m&rdquo;</p>
+<p>256色模式
+输入图片说明</p>
+<p>使用方式：</p>
+<p>ESC[ … 38;5;<!-- raw HTML omitted --> … m Select foreground color
+ESC[ … 48;5;<!-- raw HTML omitted --> … m Select background color</p>
+<p>例子：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo  -e <span style="color:#a31515">&#34;\033[1;38;5;9mI ♡  You \e[0m&#34;</span>
+</code></pre></div><p>SRG控制参数</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>关闭所有格式，还原为初始状态</td>
+</tr>
+<tr>
+<td>1</td>
+<td>粗体/高亮显示</td>
+</tr>
+<tr>
+<td>2</td>
+<td>模糊（※）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>斜体（※）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>下划线（单线）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>闪烁（慢）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>闪烁（快）（※）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>交换背景色与前景色</td>
+</tr>
+<tr>
+<td>8</td>
+<td>隐藏（伸手不见五指，啥也看不见）（※）</td>
+</tr>
+</tbody>
+</table>
+<p>（1）其中含有（※）标注的编码表示不是所有的终端仿真器都支持，只有少数仿真器支持。</p>
+<p>（2）多个SGR参数可以组合使用，例如：echo -e &ldquo;\x1b[31;4mRed Underline Text\e[0m&quot;输出红色下划线字体“Red Underline Text”。</p>
+<p>（3）更多参数信息请参考“ANSI escape code”。</p>
+<p>各语言下的控制台颜色输出
+PHP
+// hello.php</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#00f">echo</span> <span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;38;5;9mI ♡  You \e[0m</span><span style="color:#a31515">\n</span><span style="color:#a31515">&#34;</span>;
+</code></pre></div><p>请注意此处使用的是&quot;而不是单引号，因为颜色代码需要转义，正如echo的-e一样。</p>
+<p>C
+// hello.c</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00f">#include</span> <span style="color:#00f">&lt;stdio.h&gt;</span><span style="color:#00f">
+</span><span style="color:#00f"></span><span style="color:#2b91af">int</span> main() {
+    printf(<span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;31mI ♡  You \e[0m</span><span style="color:#a31515">\n</span><span style="color:#a31515">&#34;</span>);
+}
+</code></pre></div><p>编译：gcc hello.c</p>
+<p>运行：./a.out</p>
+<p>C++
+// hello.cpp</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00f">#include</span> <span style="color:#00f">&lt;iostream&gt;</span><span style="color:#00f">
+</span><span style="color:#00f"></span><span style="color:#2b91af">int</span> main() {
+    std::cout &lt;&lt; <span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;31mI ♡  You \e[0m&#34;</span> &lt;&lt; std::endl;
+}
+</code></pre></div><p>编译：g++ hello.cpp</p>
+<p>运行：./a.out</p>
+<p>Java
+// hello.java</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">class</span> <span style="color:#2b91af">hello</span> {
+    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) {
+       System.out.println(<span style="color:#a31515">&#34;\033[1;31mI ♡  You \033[0m&#34;</span>);
+    }
+}
+</code></pre></div><p>注：Java中不能识别\e和\0x1b，仅可使用\033。</p>
+<p>编译：javac hello.java</p>
+<p>运行：java hello</p>
+<p>Python
+hello.py</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">print</span> <span style="color:#a31515">&#34;</span><span style="color:#a31515">\033</span><span style="color:#a31515">[1;31mI ♡  You </span><span style="color:#a31515">\x1b</span><span style="color:#a31515">[0m&#34;</span>
+
+</code></pre></div><p>注：python（v2.6.5）中不能识别\e，可以使用\033和\x1b。</p>
+<p>非常地道的贴上原文地址：https://phperzh.com/wr?u=https%3a%2f%2fmy.oschina.net%2fdingdayu%2fblog%2f1537064</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div>
+
+			<div id="gitalk-container"></div>
+			<link rel="stylesheet" href="https://unpkg.com/gitalk@1.6.2/dist/gitalk.css">
+			<script src="https://unpkg.com/gitalk@1.6.2/dist/gitalk.min.js"></script>
+			<script>
+				const gitalk = new Gitalk({
+					clientID: '3dd487777322126558eb',
+					clientSecret: '2c012315b5e837423c278ab38118a50eab662eda',
+					repo: 'fengahan.github.io',
+					owner: 'fengahan',
+					admin: ['fengahan'],
+					id: location.pathname, 
+					distractionFreeMode: false 
+				});
+				(function() {
+					if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+						document.getElementById('gitalk-container').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+						return;
+					}
+					gitalk.render('gitalk-container');
+				})();
+			</script>
+
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2019  © Copyright notice |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

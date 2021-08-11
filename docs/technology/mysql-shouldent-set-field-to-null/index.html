@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>为什么大家都不建议Mysql字段设置为Null - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="为什么大家都不建议Mysql字段设置为Null">
+<meta itemprop="description" content="Null 在不同语言代表的意义有所不同,所以当我们跨语言的场景Null 就会产生一种歧异,就要有不同的处理。">
+<meta itemprop="datePublished" content="2020-08-29T22:55:42+09:15" />
+<meta itemprop="dateModified" content="2020-08-29T22:55:42+09:15" />
+<meta itemprop="wordCount" content="40">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta property="og:title" content="为什么大家都不建议Mysql字段设置为Null" />
+<meta property="og:description" content="Null 在不同语言代表的意义有所不同,所以当我们跨语言的场景Null 就会产生一种歧异,就要有不同的处理。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fengahan.github.io/technology/mysql-shouldent-set-field-to-null/" />
+<meta property="article:published_time" content="2020-08-29T22:55:42+09:15" />
+<meta property="article:modified_time" content="2020-08-29T22:55:42+09:15" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="为什么大家都不建议Mysql字段设置为Null"/>
+<meta name="twitter:description" content="Null 在不同语言代表的意义有所不同,所以当我们跨语言的场景Null 就会产生一种歧异,就要有不同的处理。"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://fengahan.github.io/css/dark.css" />
+
+	<script src="https://fengahan.github.io/js/feather.min.js"></script>
+	
+		<script src="https://fengahan.github.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://fengahan.github.io/">
+				<img src="https://s1.ax1x.com/2020/08/22/dds4bR.png" alt="走狗" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://fengahan.github.io/">走狗</a></h1>
+	<div class="site-description"><p>知识是有限的,想象力是无限的。-Albert Einstein</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/fengahan" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
+		</nav><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">首页</a>
+			</li>
+			
+			<li>
+				<a href="/technology">技术</a>
+			</li>
+			
+			<li>
+				<a href="/life">生活</a>
+			</li>
+			
+			<li>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/about">关于me</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">29</span>
+							<span class="rest">八月 2020</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">为什么大家都不建议Mysql字段设置为Null</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>我们都知道Mysql是一款关系性数据库,大部分应用场景在Web系统,而在我们常见的web系统中所给用户展现的数据类型基本为String和Number(int float等)
+比如 用户的昵称,银行卡余额,我们很少会给用户展现 Object,Resource 以及Array等复合类型或者Resource类型。大部分都是由String,Number组成的json 或者xml
+类型</p>
+<p>Null 在Object-c 和c 语言中一般代表空指针,在js 或者php java 里面可以代表基本类型,假如我们在写一个Api 某个字段返回一个Null(很显然是毫无意义的)
+那么对于不同的语言所代表的意义会变得不同,如果稍有处理不当还会引起程序的崩溃。</p>
+<p>比如在golang 里是没有Null这个类型的,那么Null的实际意义对于golang来说就是空字符串,golang还需要用Sql.NullString 去接受该值,这或许除了看起来啰嗦
+其他没什么问题，但是如果Java 呢？😯如果你不小心把null值放进了Java到队列里面呢 当依次pop的时候 你应该认为队列里面已经没有元素还是认为pop出的元素是Null
+呢？这显然让我们有点束手无策。</p>
+<p>不仅是在语言处理上会引起很多注意的地方。
+假设我们有一张表TableA 其中有个email 字段被设置为Null并设置为唯一索引,我们因为程序不严谨插入了一条email为Null的行,请问第二次还能不能再次插入email
+为Null行。答案可以的.Mysql 允许我们这样做。而且大部分情况下我们发现的问题时候,这样的数据已经出现N次了。将会对我们的系统造成比较严重的后果.而我们设置成
+空字符串就可以避免这样低级错误造成的严重问题。</p>
+<p>需要注意的</p>
+<p>1.Mysql 的Null造成索引问题(篇幅过长不做描述,具体自行搜索)</p>
+<p>2.Null 在排序,统计以及其他Mysql 的聚合函数都会带来不太正确结果,但是结果应该是一至性的,如同样的sql和同样的数据结果总是一致,尽管如此,这对于
+我们来讲基本毫无意义,就像FloatA*FloatB=FloatC,FloatC 或许会溢出或许和正常的计算结果有很大出入,但它始终是一致的。</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div>
+
+			<div id="gitalk-container"></div>
+			<link rel="stylesheet" href="https://unpkg.com/gitalk@1.6.2/dist/gitalk.css">
+			<script src="https://unpkg.com/gitalk@1.6.2/dist/gitalk.min.js"></script>
+			<script>
+				const gitalk = new Gitalk({
+					clientID: '3dd487777322126558eb',
+					clientSecret: '2c012315b5e837423c278ab38118a50eab662eda',
+					repo: 'fengahan.github.io',
+					owner: 'fengahan',
+					admin: ['fengahan'],
+					id: location.pathname, 
+					distractionFreeMode: false 
+				});
+				(function() {
+					if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+						document.getElementById('gitalk-container').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+						return;
+					}
+					gitalk.render('gitalk-container');
+				})();
+			</script>
+
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2020  © Copyright notice |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

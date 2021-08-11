@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>还在手动添加路由进行rabc权限管理,那太out了 - 走狗</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="还在手动添加路由进行rabc权限管理,那太out了">
+<meta itemprop="description" content="每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式...">
+<meta itemprop="datePublished" content="2020-08-24T21:36:46+08:00" />
+<meta itemprop="dateModified" content="2020-08-24T21:36:46+08:00" />
+<meta itemprop="wordCount" content="338">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta property="og:title" content="还在手动添加路由进行rabc权限管理,那太out了" />
+<meta property="og:description" content="每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fengahan.github.io/technology/php-auto-generate-route/" />
+<meta property="article:published_time" content="2020-08-24T21:36:46+08:00" />
+<meta property="article:modified_time" content="2020-08-24T21:36:46+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="还在手动添加路由进行rabc权限管理,那太out了"/>
+<meta name="twitter:description" content="每次开发完某个模块添加权限很是繁琐,而且增加了出错的几率,目前看到还是有部分项目在 用十年前的(手动)添加方式..."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://fengahan.github.io/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://fengahan.github.io/css/dark.css" />
+
+	<script src="https://fengahan.github.io/js/feather.min.js"></script>
+	
+		<script src="https://fengahan.github.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://fengahan.github.io/">
+				<img src="https://s1.ax1x.com/2020/08/22/dds4bR.png" alt="走狗" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://fengahan.github.io/">走狗</a></h1>
+	<div class="site-description"><p>知识是有限的,想象力是无限的。-Albert Einstein</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/fengahan" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
+		</nav><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">首页</a>
+			</li>
+			
+			<li>
+				<a href="/technology">技术</a>
+			</li>
+			
+			<li>
+				<a href="/life">生活</a>
+			</li>
+			
+			<li>
+				<a href="/categories">分类</a>
+			</li>
+			
+			<li>
+				<a href="/about">关于me</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">24</span>
+							<span class="rest">八月 2020</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">还在手动添加路由进行rabc权限管理,那太out了</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>后台rabc权限是很普遍的一个应该应用了,目前后台基础框架一大堆,也很少有人去从头开始实现后台基础项目的部署.</p>
+<p>但是如果你找到到基础后台项目还没有实现
+通过reflect实现路由的自动添加和整合,就真的是太out了。。。</p>
+<p>老规矩 闲话少叙,言归正传。比如我现在写了一个member Controller 内容如下</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+
+<span style="color:#00f">Class</span> <span style="color:#2b91af">Member</span>{
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> __construct(){}
+	<span style="color:#a31515">/**
+</span><span style="color:#a31515">    * @return false|string
+</span><span style="color:#a31515">    */</span>
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> index(){
+		<span style="color:#00f">return</span> $this-&gt;out([<span style="color:#a31515">&#39;A&#39;</span>,<span style="color:#a31515">&#39;B&#39;</span>,<span style="color:#a31515">&#39;C&#39;</span>,<span style="color:#a31515">&#39;D&#39;</span>]);
+	}
+	<span style="color:#a31515">/**
+</span><span style="color:#a31515">    * @return false|string
+</span><span style="color:#a31515">    */</span>
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> create(){
+		<span style="color:#00f">return</span> $this-&gt;out([<span style="color:#a31515">&#39;success&#39;</span>]);
+	}
+	<span style="color:#a31515">/**
+</span><span style="color:#a31515">    * @return false|string
+</span><span style="color:#a31515">    */</span>
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> update(){
+		<span style="color:#00f">return</span> $this-&gt;out([<span style="color:#a31515">&#39;success&#39;</span>]);
+	}
+   <span style="color:#a31515">/**
+</span><span style="color:#a31515">    * @return array
+</span><span style="color:#a31515">    */</span>
+    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#00f">function</span> view(){
+        <span style="color:#00f">return</span> [];
+    }
+    <span style="color:#a31515">/**
+</span><span style="color:#a31515">    * @return array
+</span><span style="color:#a31515">    */</span>
+	<span style="color:#00f">protected</span> <span style="color:#00f">function</span> findModel(){
+		<span style="color:#00f">return</span> [];
+	}
+     <span style="color:#a31515">/**
+</span><span style="color:#a31515">     * @return false|string
+</span><span style="color:#a31515">     */</span>
+	<span style="color:#00f">private</span> <span style="color:#00f">function</span> out(<span style="color:#00f">array</span> $data){
+		<span style="color:#00f">return</span> json_encode($data);
+	}
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> __destruct() {
+        <span style="color:#00f">return</span>;
+    }
+}
+
+</code></pre></div><blockquote>
+<p>十年前的方式:</p>
+</blockquote>
+<p>1.登录后台</p>
+<p>2.打开路由添加页面</p>
+<p>3.把{Controller}/{Method},规则名称添加到数据库</p>
+<p>4.关闭页面</p>
+<p>5.重复操作2-4(三个)步骤 n次</p>
+<p>6.同步数据库到正式服</p>
+<blockquote>
+<p>现在的方式:我们或许只需要一个命令就行了 下面是我们的新类</p>
+</blockquote>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+
+<span style="color:#00f">Class</span> <span style="color:#2b91af">Member</span>{
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> __construct(){
+	    <span style="color:#00f">echo</span> <span style="color:#a31515">&#39;so easy&#39;</span>;
+	}
+    <span style="color:#a31515">/**
+</span><span style="color:#a31515">     * @router(&#34;列表&#34;,&#34;查看会员列表&#34;)
+</span><span style="color:#a31515">     * @return string
+</span><span style="color:#a31515">     */</span>
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> index(){
+		<span style="color:#00f">return</span> $this-&gt;out([<span style="color:#a31515">&#39;A&#39;</span>,<span style="color:#a31515">&#39;B&#39;</span>,<span style="color:#a31515">&#39;C&#39;</span>,<span style="color:#a31515">&#39;D&#39;</span>]);
+	}
+    <span style="color:#a31515">/**
+</span><span style="color:#a31515">     *描述可以没有
+</span><span style="color:#a31515">     * @router(&#34;创建&#34;)
+</span><span style="color:#a31515">     * @return string
+</span><span style="color:#a31515">     */</span>
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> create(){
+		<span style="color:#00f">return</span> $this-&gt;out([<span style="color:#a31515">&#39;success&#39;</span>]);
+	}
+     <span style="color:#a31515">/**
+</span><span style="color:#a31515">     *名字也可以没有
+</span><span style="color:#a31515">     * @router(&#34;&#34;,&#34;更新信息&#34;)
+</span><span style="color:#a31515">     * @return false|string
+</span><span style="color:#a31515">     */</span>
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> update(){
+		<span style="color:#00f">return</span> $this-&gt;out([<span style="color:#a31515">&#39;success&#39;</span>]);
+	}
+    <span style="color:#a31515">/**
+</span><span style="color:#a31515">     *static
+</span><span style="color:#a31515">     * @router(&#34;&#34;,&#34;预览信息&#34;)
+</span><span style="color:#a31515">     * @return array
+</span><span style="color:#a31515">     */</span>
+    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#00f">function</span> view(){
+        <span style="color:#00f">return</span> [];
+    }
+    <span style="color:#a31515">/**
+</span><span style="color:#a31515">     * 该方法不会被放到路由中因为是受保护的
+</span><span style="color:#a31515">     * @router(&#34;获取模型&#34;,&#34;方法的描述&#34;)
+</span><span style="color:#a31515">     * @return array
+</span><span style="color:#a31515">     */</span>
+	<span style="color:#00f">protected</span> <span style="color:#00f">function</span> findModel(){
+		<span style="color:#00f">return</span> [];
+	}
+    <span style="color:#a31515">/**
+</span><span style="color:#a31515">     * 该方法不会被放到路由中因为是私有的
+</span><span style="color:#a31515">     * @router(&#34;输出&#34;,&#34;方法的描述&#34;)
+</span><span style="color:#a31515">     * @param array $data
+</span><span style="color:#a31515">     * @return false|string
+</span><span style="color:#a31515">     */</span>
+	<span style="color:#00f">private</span> <span style="color:#00f">function</span> out(<span style="color:#00f">array</span> $data){
+		<span style="color:#00f">return</span> json_encode($data);
+	}
+	<span style="color:#a31515">/**
+</span><span style="color:#a31515">     * 该方法不会被放到路由中因为是析构函数
+</span><span style="color:#a31515">     * @router(&#34;输出&#34;,&#34;方法的描述&#34;)
+</span><span style="color:#a31515">     * @return false|string
+</span><span style="color:#a31515">     */</span>
+	<span style="color:#00f">public</span> <span style="color:#00f">function</span> __destruct() {
+	   <span style="color:#00f">return</span>;
+	}
+}
+
+</code></pre></div><p>很容易的就能看出我们在注释里面添加了@router(&ldquo;AAA&rdquo;,&ldquo;ZZZ&rdquo;)的注释(不是注解,注解是能够提供元数据的)字样
+其中 <code>AAA</code> 代表名称 <code>ZZZ</code> 代表描述。</p>
+<blockquote>
+<p>下面我们开始一系列骚操作</p>
+</blockquote>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span> 
+ 
+ <span style="color:#008000">//Member 当前类名
+</span><span style="color:#008000"></span> $class = <span style="color:#00f">new</span> \ReflectionClass(<span style="color:#a31515">&#39;Member&#39;</span>);
+ $className=$class-&gt;getShortName();
+ $methods=$class-&gt;getMethods();
+ $arr=[];
+ <span style="color:#00f">foreach</span>($methods <span style="color:#00f">as</span> &amp;$method)
+ {
+     $ret=[];
+     <span style="color:#008000">//过滤掉无法通过route 访问对方法类型
+</span><span style="color:#008000"></span>     <span style="color:#00f">if</span> ( $method-&gt;isConstructor() || $method-&gt;isStatic() || $method-&gt;isDestructor()){
+         <span style="color:#00f">continue</span>;
+     }
+     <span style="color:#00f">if</span>($method-&gt;isPublic())
+     {
+         $docConTent=$method-&gt;getDocComment();<span style="color:#008000">////获取注释
+</span><span style="color:#008000"></span>         preg_match(<span style="color:#a31515">&#39;/\@router(?:\()(.*)(?:\))/i&#39;</span>, $docConTent, $matches);<span style="color:#008000">// 匹配
+</span><span style="color:#008000"></span>         $methodName=$method-&gt;getName();
+         <span style="color:#00f">if</span>(isset($matches[1]) &amp;&amp; !<span style="color:#00f">empty</span>($matches[1])){
+             $routeArg=preg_split(<span style="color:#a31515">&#34;/[,]+/&#34;</span>, trim($matches[1]), -1, PREG_SPLIT_NO_EMPTY);
+             $ret[<span style="color:#a31515">&#39;method&#39;</span>]=$methodName;
+             $ret[<span style="color:#a31515">&#39;route_name&#39;</span>]=$routeArg[0]??<span style="color:#a31515">&#39;&#39;</span>;<span style="color:#008000">//路由名称对应@router的第一个参数
+</span><span style="color:#008000"></span>             $ret[<span style="color:#a31515">&#39;route_description&#39;</span>]=$routeArg[1]??<span style="color:#a31515">&#39;&#39;</span>;<span style="color:#008000">//路由描述对应@router的第二个参数
+</span><span style="color:#008000"></span>             <span style="color:#008000">// your code ... 如插入数据库
+</span><span style="color:#008000"></span>             <span style="color:#008000">//通过更改@router(&#39;AA&#39;,&#39;ZZZ&#39;)添加更多的内容
+</span><span style="color:#008000"></span>             <span style="color:#008000">//如@router(&#39;A&#39;,&#39;BB&#39;,&#39;CCC&#39;)可以在某次更新的时候只将含有CCC的加入到数据库
+</span><span style="color:#008000"></span>             $arr[$className][]=$ret;
+         }<span style="color:#00f">else</span>{
+            <span style="color:#00f">echo</span> sprintf(<span style="color:#a31515">&#34;Error:Class %s 的 %s方法 注释路由解析失败</span><span style="color:#a31515">\r\n</span><span style="color:#a31515">&#34;</span>,$className,$methodName);
+         }
+ 
+     }
+ }
+ print_r($arr);
+
+</code></pre></div><p>这里是的$arr一定是你特别想要的东东:</p>
+<p>结果:</p>
+<p>Array
+(
+[Member] =&gt; Array
+(</p>
+<pre><code>        [0] =&gt; Array
+            (
+                [method] =&gt; index
+                [route_name] =&gt; &quot;列表&quot;
+                [route_description] =&gt; &quot;查看会员列表&quot;
+            )
+
+        [1] =&gt; Array
+            (
+                [method] =&gt; create
+                [route_name] =&gt; &quot;创建&quot;
+                [route_description] =&gt;
+            )
+
+        [2] =&gt; Array
+            (
+                [method] =&gt; update
+                [route_name] =&gt; &quot;&quot;
+                [route_description] =&gt; &quot;更新信息&quot;
+            )
+
+    )
+</code></pre>
+<p>)</p>
+<h4 id="既然你看到这里类了说明你还是对这个小技巧很感兴趣滴偷偷告诉你可以配置你的编辑器-添加输入自动完成router功能哦很简单的哦具体步骤百度下就ok了">既然你看到这里类了,说明你还是对这个小技巧很感兴趣滴,偷偷告诉你😘,可以配置你的编辑器 添加输入自动完成@router功能哦(很简单的哦,具体步骤百度下就ok了)</h4>
+
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div>
+
+			<div id="gitalk-container"></div>
+			<link rel="stylesheet" href="https://unpkg.com/gitalk@1.6.2/dist/gitalk.css">
+			<script src="https://unpkg.com/gitalk@1.6.2/dist/gitalk.min.js"></script>
+			<script>
+				const gitalk = new Gitalk({
+					clientID: '3dd487777322126558eb',
+					clientSecret: '2c012315b5e837423c278ab38118a50eab662eda',
+					repo: 'fengahan.github.io',
+					owner: 'fengahan',
+					admin: ['fengahan'],
+					id: location.pathname, 
+					distractionFreeMode: false 
+				});
+				(function() {
+					if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+						document.getElementById('gitalk-container').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+						return;
+					}
+					gitalk.render('gitalk-container');
+				})();
+			</script>
+
+		</div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2020  © Copyright notice |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>
