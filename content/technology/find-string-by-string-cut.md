@@ -85,7 +85,7 @@ function find($chars,$value)
     }
 
 }
-var_dump(find(ABCDE,BCD));//output:true
+var_dump(find(ABCDE,BCD));//output false
 ?>
 ```
 下面这张图是两个方法运行100万次的时间对比:仅供娱乐。
